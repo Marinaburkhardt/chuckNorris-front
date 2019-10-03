@@ -23,6 +23,13 @@
         <tr>
           <th scope="row">2</th>
           <td>Jacob</td>
+          <td>Martin</td>
+          <td>Marina</td>
+          <td>Ezequiel</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Otto</td>
           <td>Thornton</td>
           <td>@fat</td>
         </tr>
