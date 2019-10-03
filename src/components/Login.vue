@@ -1,6 +1,7 @@
 <template>
   <div id="login" class="login-page">
     <div class="form">
+        <h2>Sign in</h2>
       <form class="login-form">
         <input type="text" placeholder="Ingrese su DNI"/>
         <button>Login</button>
@@ -29,6 +30,8 @@ export default {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
+    text-align: center;
+    margin-top: 1%;
   }
   .form {
     position: relative;
@@ -55,7 +58,7 @@ export default {
     font-family: "Avenir", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: rgb(34, 60, 179);
     width: 100%;
     border: 0;
     padding: 15px;
@@ -66,7 +69,7 @@ export default {
     cursor: pointer;
   }
   .form button:hover,.form button:active,.form button:focus {
-    background: rgb(48, 104, 50);
+    background: rgb(10, 188, 219);
   }
 
 </style>
