@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Inicio from './components/Inicio.vue';
-import About from './components/About.vue';
+import Login from './components/Login.vue';
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,7 +17,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/inicio', component: Inicio },
-    { path: '/about', component: About }
+    { path: '/login', component: Login }
   ]
 });
 
