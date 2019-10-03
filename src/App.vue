@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <Inicio msg="BIENVENIDO A TU MUERTE"/>
+    <router-link to="/inicio">inicio</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
