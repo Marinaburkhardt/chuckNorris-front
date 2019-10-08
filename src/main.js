@@ -4,12 +4,14 @@ import Inicio from './components/Inicio.vue'
 import About from './components/About.vue'
 import Partidas from './components/Partidas'
 import VueRouter from 'vue-router'
+//Boostrap
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+
 
 Vue.config.productionTip = false
 
