@@ -2,6 +2,7 @@
   <div class="hello; col-sm-3 offset-6">
     <h1>{{ msg }}</h1>
     <router-link to="/about">about</router-link>
+    <router-link to="/juegoFinalizado">Juego Finalizado</router-link>
     <router-view></router-view>
   </div>
 </template>
