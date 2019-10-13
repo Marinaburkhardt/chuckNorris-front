@@ -1,9 +1,9 @@
 <template>
-  <h1>Maldito router </h1>
+  <div>
+    <h1>Maldito router</h1>
+  </div>
 </template>
 
 <script>
-  export default {
-
-  }
+export default {};
 </script>

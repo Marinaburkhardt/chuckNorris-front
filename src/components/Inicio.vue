@@ -1,46 +1,48 @@
 <template>
-  <div class="hello; col-sm-3 offset-6">
-    <h1>BIENVENIDO A TU MUERTE</h1>
-    <br>
-    <br>
-    <br>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Martin</td>
-          <td>Marina</td>
-          <td>Ezequiel</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Otto</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-    <router-link to="/about">about</router-link>
+  <div>
+    <br />
+    <h1 style="text-align: center">BIENVENIDO A TU MUERTE</h1>
+    <br />
+    <br />
+    <!-- <img src="../assets/chuck-inicio.png"> -->
+    <div class="hello; col-sm-3 offset-8">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Top 5</th>
+            <th scope="col">Jugador</th>
+            <th scope="col">Partidas Ganadas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td>Marina</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>Martin</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td>Ezequiel</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td>Gaspar</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td>Mariano</td>
+            <td>5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <router-view></router-view>
   </div>
 </template>

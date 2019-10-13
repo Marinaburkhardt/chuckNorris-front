@@ -17,6 +17,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/inicio', component: Inicio },
+    { path: '/', component: Inicio },
     { path: '/about', component: About }
   ]
 });
@@ -25,8 +26,3 @@ new Vue({
   router,
   render: h => h(App),
 }).$mount('#app');
-
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app')
-
