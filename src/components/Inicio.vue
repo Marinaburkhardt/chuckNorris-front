@@ -3,45 +3,30 @@
     <br />
     <h1 style="text-align: center">BIENVENIDO A TU MUERTE</h1>
     <br />
-    <br />
-    <!-- <img src="../assets/chuck-inicio.png"> -->
-    <div class="hello; col-sm-3 offset-8">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Top 5</th>
-            <th scope="col">Jugador</th>
-            <th scope="col">Partidas Ganadas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Marina</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Martin</td>
-            <td>15</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Ezequiel</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td>Gaspar</td>
-            <td>8</td>
-          </tr>
-          <tr>
-            <th>5</th>
-            <td>Mariano</td>
-            <td>5</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
+      <div class="col-sm-2 offset-2">
+        <router-link to="/login" style="color:white">
+          <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />
+        </router-link>
+      </div>
+      <div class="col-sm-3 offset-4">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="text-align: center" scope="col">Top 5</th>
+              <th style="text-align: center" scope="col">Jugador</th>
+              <th style="text-align: center" scope="col">Ganadas</th>
+            </tr>
+          </thead>
+          <tbody v-for="jugador in mejoresJugadores" :key="jugador">
+            <tr>
+              <th style="text-align: center">{{jugador.posicion}}</th>
+              <td style="text-align: center">{{jugador.nick}}</td>
+              <td style="text-align: center">{{jugador.ganadas}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <router-view></router-view>
   </div>
@@ -50,26 +35,21 @@
 <script>
 export default {
   name: "Inicio",
-  props: {
-    msg: String
+  data: function() {
+    return {
+      mejoresJugadores: [
+        { posicion: 1, nick: "mkraitman", ganadas: 25 },
+        { posicion: 2, nick: "mburkhardt", ganadas: 20 },
+        { posicion: 3, nick: "edditrana", ganadas: 18 },
+        { posicion: 4, nick: "maquino", ganadas: 15 },
+        { posicion: 5, nick: "gaspar", ganadas: 10 }
+      ]
+    };
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+
+
+
+
