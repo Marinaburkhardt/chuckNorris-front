@@ -1,10 +1,11 @@
 <template>
   <div id="login" class="login-page">
     <div class="form">
-        <h2>Sign in</h2>
+        <h2>Login</h2>
       <form class="login-form">
-        <input type="text" placeholder="Ingrese su DNI"/>
-        <button>Login</button>
+        <input type="text" placeholder="Ingrese su DNI" required/>
+        <input type="password" placeholder="Ingrese su password" required/>
+        <button style="background-color: black; color: white">Login</button>
       </form>
     </div>
   </div>
