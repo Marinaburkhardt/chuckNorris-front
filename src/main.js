@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Inicio from './components/Inicio.vue';
 import Login from './components/Login.vue';
+import About from './components/About.vue';
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
