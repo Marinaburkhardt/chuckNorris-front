@@ -21,8 +21,8 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/inicio', component: Inicio },
     { path: '/', component: Inicio },
+    { path: '/inicio', component: Inicio },
     { path: '/about', component: About },
     { path: '/login', component: Login },
     { path: '/juegoFinalizado', component: JuegoFinalizado },
