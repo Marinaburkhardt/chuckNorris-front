@@ -3,6 +3,7 @@ import App from './App.vue'
 import Inicio from './components/Inicio.vue';
 import Login from './components/Login.vue';
 import About from './components/About.vue';
+import JuegoFinalizado from './components/JuegoFinalizado.vue';
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -20,7 +21,9 @@ const router = new VueRouter({
     { path: '/inicio', component: Inicio },
     { path: '/', component: Inicio },
     { path: '/about', component: About },
-    { path: '/login', component: Login }
+    { path: '/login', component: Login },
+    { path: '/juegoFinalizado', component: JuegoFinalizado },
+    { path: '/about', component: About }
   ]
 });
 

@@ -12,6 +12,9 @@
     </b-navbar-brand>
 
     <b-navbar-brand class="ml-auto">
+      <router-link to="/juegoFinalizado" style="color:white">Juego Finalizado</router-link>
+    </b-navbar-brand>
+    <b-navbar-brand class="ml-2">
       <router-link to="/about" style="color:white">About</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
@@ -19,7 +22,6 @@
     </b-navbar-brand>
   </b-navbar>
 </template>
-
 
 <script>
 export default {
