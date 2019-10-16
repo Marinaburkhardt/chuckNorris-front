@@ -12,9 +12,6 @@
     </b-navbar-brand>
 
     <b-navbar-brand class="ml-auto">
-      <router-link to="/juegoFinalizado" style="color:white">Juego Finalizado</router-link>
-    </b-navbar-brand>
-    <b-navbar-brand class="ml-2">
       <router-link to="/about" style="color:white">About</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
@@ -23,7 +20,14 @@
     <b-navbar-brand class="ml-2">
       <router-link to="/partidas" style="color:white">Partidas</router-link>
     </b-navbar-brand>
+    <b-navbar-brand class="ml-2">
+      <router-link to="/juegoFinalizadoGanador" style="color:white">Juego Finalizado Ganador</router-link>
+    </b-navbar-brand>
+    <b-navbar-brand class="ml-2">
+      <router-link to="/juegoFinalizadoPerdedor" style="color:white">Juego Finalizado Perdedor</router-link>
+    </b-navbar-brand>
   </b-navbar>
+    
 </template>
 
 <script>

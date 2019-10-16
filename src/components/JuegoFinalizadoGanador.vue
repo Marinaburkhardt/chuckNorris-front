@@ -19,7 +19,7 @@ import axios from 'axios'
 const API_RANDOM_JOKE_ENDPOINT = 'https://api.icndb.com/jokes/random'
 
 export default {
-    name: 'JuegoFinalizado',
+    name: 'JuegoFinalizadoGanador',
 
     mounted() {
       this.fetchRandomJoke()

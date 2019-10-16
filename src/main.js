@@ -3,7 +3,8 @@ import App from './App.vue'
 import Inicio from './components/Inicio.vue';
 import Login from './components/Login.vue';
 import About from './components/About.vue';
-import JuegoFinalizado from './components/JuegoFinalizado.vue';
+import JuegoFinalizadoGanador from './components/JuegoFinalizadoGanador.vue';
+import JuegoFinalizadoPerdedor from './components/JuegoFinalizadoPerdedor.vue';
 import Partidas from './components/Partidas';
 import VueRouter from 'vue-router'
 //Boostrap
@@ -25,8 +26,9 @@ const router = new VueRouter({
     { path: '/inicio', component: Inicio },
     { path: '/about', component: About },
     { path: '/login', component: Login },
-    { path: '/juegoFinalizado', component: JuegoFinalizado },
     { path: '/partidas', component: Partidas},
+    { path: '/juegoFinalizadoGanador', component: JuegoFinalizadoGanador },
+    { path: '/juegoFinalizadoPerdedor', component: JuegoFinalizadoPerdedor },
     { path: '/about', component: About }
   ]
 });
