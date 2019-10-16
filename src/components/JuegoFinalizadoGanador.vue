@@ -7,6 +7,7 @@
     
     <!-- solo para debuggear es el boton! borrar luego -->
     <span>
+      <br>
       <img @click="fetchRandomJoke()" style="cursor: pointer" src="../assets/background/finalizadoJoke.png" alt="backgound" class="bg" />
     </span>
 

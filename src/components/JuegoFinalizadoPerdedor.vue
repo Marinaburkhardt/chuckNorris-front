@@ -1,9 +1,10 @@
 <template>
   <div>
+    <br>
     <div class="speech-bubble">
       Gil, perdiste!
     </div>
-
+    <br>
     <img src="../assets/background/finalizadoPerdedor.png" alt="backgound" class="bg" />
   </div>
 </template>
