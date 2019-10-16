@@ -21,7 +21,7 @@
       <router-link to="/login" style="color:white">Login</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
-      <router-link to="/partidas">partidas</router-link>
+      <router-link to="/partidas" style="color:white">Partidas</router-link>
     </b-navbar-brand>
   </b-navbar>
 </template>

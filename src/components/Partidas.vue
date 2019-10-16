@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="row">
+    <br>
+    <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <div class="col-4 mt-4 mr-4 container-fluid">
         <h3>Partidas</h3>
 
@@ -61,7 +62,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <b-modal ref="turno-modal" hide-footer title>
         <div class="d-block text-center">
           <img
@@ -76,7 +77,7 @@
       </b-modal>
     </div>
 
-    <div class="row">
+    <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <b-modal ref="no-turno-modal" hide-footer title>
         <div class="d-block text-center">
           <img
@@ -90,7 +91,7 @@
       </b-modal>
     </div>
 
-    <div class="row">
+    <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <b-modal ref="nueva-partida-modal" hide-footer title>
         <div class="d-block text-center">
           <img
@@ -108,7 +109,7 @@
 </template>
 
 
-<style>
+<style scoped>
 /* table scroll */
 tr {
   width: 100%;
