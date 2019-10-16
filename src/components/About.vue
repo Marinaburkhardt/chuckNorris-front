@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Maldito router</h1>
+    <h1>Router</h1>
   </div>
 </template>
 

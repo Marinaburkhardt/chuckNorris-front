@@ -21,10 +21,10 @@
       <router-link to="/partidas" style="color:white">Partidas</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
-      <router-link to="/juegoFinalizadoGanador" style="color:white">Juego Finalizado Ganador</router-link>
+      <router-link to="/juegoFinalizadoGanador" style="color:white">Ganador</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
-      <router-link to="/juegoFinalizadoPerdedor" style="color:white">Juego Finalizado Perdedor</router-link>
+      <router-link to="/juegoFinalizadoPerdedor" style="color:white">Perdedor</router-link>
     </b-navbar-brand>
   </b-navbar>
     
