@@ -6,7 +6,7 @@
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <div class="col-sm-2 offset-2">
         <router-link to="/login" style="color:white">
-          <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />zz
+          <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />
         </router-link>
       </div>
       <div class="col-sm-3 offset-4">
