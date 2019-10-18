@@ -4,7 +4,7 @@
     <div v-if="currentJoke != null" class="speech-bubble">{{currentJoke.data.value.joke}}</div>
 
     <!-- solo para debuggear es el boton! borrar luego -->
-    <span>
+    <span v-if="currentJoke != null">
       <br />
       <img
         src="../assets/background/finalizadoJoke.png"
