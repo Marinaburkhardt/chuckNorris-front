@@ -15,7 +15,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
-
 Vue.config.productionTip = false
 
 const router = new VueRouter({

@@ -1,48 +1,43 @@
 <template>
   <div>
-    <br>
-    <div class="speech-bubble">
-      {{currentJoke.joke}}
-    </div>
-    
+    <br />
+    <div v-if="currentJoke != null" class="speech-bubble">{{currentJoke.data.value.joke}}</div>
+
     <!-- solo para debuggear es el boton! borrar luego -->
     <span>
-      <br>
-      <img @click="fetchRandomJoke()" style="cursor: pointer" src="../assets/background/finalizadoJoke.png" alt="backgound" class="bg" />
+      <br />
+      <img
+        src="../assets/background/finalizadoJoke.png"
+        alt="backgound"
+        class="bg"
+      />
     </span>
-
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-
-const API_RANDOM_JOKE_ENDPOINT = 'https://api.icndb.com/jokes/random'
+import RestServices from "@/services/RestServices";
 
 export default {
-    name: 'JuegoFinalizadoGanador',
+  name: "JuegoFinalizadoGanador",
 
-    mounted() {
-      this.fetchRandomJoke()
-    },
+  data: function() {
+    return {
+      currentJoke: null
+    };
+  },
 
-    data: function() {
-      return {
-        currentJoke: null
-      }
-    },
-
-    methods: {
-      fetchRandomJoke() {
-        axios.get(API_RANDOM_JOKE_ENDPOINT)
-          .then(({ data }) => this.currentJoke = data.value)
-      }
-    }
-}
+  created() {
+    RestServices.getChisteRandom()
+    .then(response => {
+      this.currentJoke = response
+    })
+    .catch(error => console.log(error))
+  }
+};
 </script>
 
 <style scoped>
-
 img.bg {
   min-height: 30%;
   max-width: 30%;
@@ -50,7 +45,7 @@ img.bg {
   position: relative;
   top: 0;
   left: 10%;
-  float: left ;
+  float: left;
 }
 
 button {
@@ -62,7 +57,7 @@ button {
 .speech-bubble {
   position: relative;
   background: #ca7a12;
-  border-radius: .4em;
+  border-radius: 0.4em;
   padding: 15px;
   text-align: center;
   max-width: 60%;
@@ -70,7 +65,7 @@ button {
   margin-right: auto;
 }
 .speech-bubble:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -83,5 +78,4 @@ button {
   margin-left: -25.5px;
   margin-bottom: -51px;
 }
-
 </style>
