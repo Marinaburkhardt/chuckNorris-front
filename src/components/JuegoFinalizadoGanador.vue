@@ -32,7 +32,7 @@ export default {
     .then(response => {
       this.currentJoke = response
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
   }
 };
 </script>
