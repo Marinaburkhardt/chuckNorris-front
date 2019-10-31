@@ -22,40 +22,35 @@
                 </table>
             </div>
 
-            <!-- <div class="col-8 d-flex flex-column" >
-              <h5>A jugar!</h5>
-              <div v-bind:class="flipped ? 'flip-container flipped': 'flip-container'">
-                <div class="flipper">
-                  <div class="front">
-                    <slot name="front"></slot>
-                    <v-icon class="frontFlipBtn" 
-                        v-on:click="flipped=true">
-                        redo
-                    </v-icon>
-                  </div>
-                  <div class="back">
-                    <slot name="back"></slot>
-                    <v-icon class="backFlipBtn" 
-                        v-on:click="flipped=false">
-                        redo
-                    </v-icon>
-                  </div>
-                </div>
-              </div>
-            </div>-->
-
             <!-- Parte principal -->
             <div class="col-8 d-flex flex-column" >
                 <h5>A jugar!</h5>
 
-                <vue-flipcard>
-                  <template slot="front" @flip="onFlip">
-                    <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png"/>
-                  </template>
-                  <template slot="back">
-                    <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
-                  </template>
-                </vue-flipcard>
+                <div class="row justify-content-around">
+                  <div class="col-4">
+                      <vue-flipcard>
+                        <template slot="front" @flip="onFlip">
+                          <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png"/>
+                        </template>
+                        <template slot="back" v-if="!figuraLanzada">
+                          <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
+                        </template>
+                      </vue-flipcard>
+                  </div>
+
+                  <div class="col-4">
+                      <vue-flipcard>
+                        <template slot="front" @flip="onFlip">
+                          <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png"/>
+                        </template>
+                        <template slot="back">
+                          <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
+                        </template>
+                      </vue-flipcard>
+                  </div>
+
+                </div>
+                
 
                 <br>
                 <h5>Elije tu figura!</h5>
@@ -129,9 +124,17 @@ export default {
         { turno: 3, nick: "edditrana" },
         { turno: 4, nick: "mkraitman" },
         { turno: 5, nick: "edditrana" }
-      ]
+      ],
+      figuraLanzada : true
     };
-  }
+  },
+  methods: {
+
+    develarCarta () {
+      this.$refs.flipcard.flip()
+    }
+
+    }
 }
 </script>
 
@@ -144,7 +147,7 @@ export default {
 }
 
 .imgJugada {
-  position: absolute;
+  position: relative;
 }
 
 .example{
