@@ -18,7 +18,7 @@
               <th style="text-align: center" scope="col">Ganadas</th>
             </tr>
           </thead>
-          <tbody v-for="jugador in mejoresJugadores" :key="jugador">
+          <tbody v-for="jugador in mejoresJugadores" :key="jugador.nombre">
             <tr>
               <th style="text-align: center">{{jugador.posicion}}</th>
               <td style="text-align: center">{{jugador.nick}}</td>
