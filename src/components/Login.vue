@@ -34,15 +34,10 @@ export default {
       console.log("nick: ", this.nick, " - password: ", this.password);
       this.$store.commit('setIsAuthenticated', {nick: this.nick, password: this.password})
       if (this.$store.getters.estaLogueado) {
-        this.$router.push('partidas');
-        // this.router.push({ name: "partidas" });
-        // router.push("partidas")
+        this.$router.push('partidas')
+      } else {
+        // TODO: cartel de alerta (o error en el formulario) indicando que el usuario y/o contraseña es incorrecto
       }
-      // this.$store.dispatch("loguearse", {
-      //   nick: this.nick,
-      //   password: this.password
-      // });
-      // return this.$store.getters.isAuthenticated;
     }
   }
 };
