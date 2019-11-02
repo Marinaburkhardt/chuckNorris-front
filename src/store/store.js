@@ -9,17 +9,22 @@ export default new Vuex.Store({
     },
     mutations: {
         setIsAuthenticated(estado) {
+            console.log('estado: ', estado)
             state.isAuthenticated = estado;
         }
     },
     actions: {
-        loguearse({ commit }, infoLogin) {
+        loguearse({ dispatch }, infoLogin) {
             console.log('infoLogin: ', infoLogin)
             // TODO: pegada al back para chequear si el usuario existe
-            commit('setIsAuthenticated(true)')
+            dispatch('setIsAuthenticated', {
+                autenticado: true
+            })
+            // commit('setIsAuthenticated', {
+            //     autenticado: true
+            // })
             console.log('this.state.isAuthenticated: ', this.state.isAuthenticated);
         }
-
     },
     getters: {
         doneTodosCount: (state, getters) => {
