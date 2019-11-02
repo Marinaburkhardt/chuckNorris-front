@@ -2,19 +2,33 @@
   <div id="login" class="login-page">
     <div class="form">
         <h2>Login</h2>
-      <form class="login-form">
-        <input type="text" placeholder="Ingrese su DNI" required/>
-        <input type="password" placeholder="Ingrese su password" required/>
-        <button style="background-color: black; color: white">Login</button>
+      <form>
+        <input v-model="nick" type="text" placeholder="Ingrese su DNI" required/>
+        <input v-model="password" type="password" placeholder="Ingrese su password" required/>
+        <button v-on:click="login" style="background-color: black; color: white">Login</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import Login from "@/services/RestServices";
 
 export default {
-  name: 'Login'
+  name: 'Login',
+  
+  data: function() {
+    return {
+      nick: '',
+      password: ''
+    };
+  },
+
+  methods : {
+    login(){
+      Login.loginJugador(this.nick,this.password)
+    }
+  },
 }
 </script>
 
@@ -65,8 +79,6 @@ export default {
     padding: 15px;
     color: #FFFFFF;
     font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
     cursor: pointer;
   }
   .form button:hover,.form button:active,.form button:focus {
