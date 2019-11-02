@@ -8,28 +8,29 @@ export default new Vuex.Store({
         isAuthenticated: false,
     },
     mutations: {
-        setIsAuthenticated(estado) {
-            console.log('estado: ', estado)
-            state.isAuthenticated = estado;
-        }
-    },
-    actions: {
-        loguearse({ dispatch }, infoLogin) {
-            console.log('infoLogin: ', infoLogin)
+        setIsAuthenticated(state, jsonLogin) {
+            // console.log('estado: ', estado)
+            console.log('jsonLogin: ', jsonLogin)
             // TODO: pegada al back para chequear si el usuario existe
-            dispatch('setIsAuthenticated', {
-                autenticado: true
-            })
-            // commit('setIsAuthenticated', {
-            //     autenticado: true
-            // })
-            console.log('this.state.isAuthenticated: ', this.state.isAuthenticated);
+            state.isAuthenticated = true;
         }
-    },
+    },  
+    // actions: {
+    //     loguearse({ commit }, infoLogin) {
+    //         console.log('infoLogin: ', infoLogin)
+    //         // TODO: pegada al back para chequear si el usuario existe
+    //         commit('setIsAuthenticated', {
+    //             autenticado: true
+    //         })
+    //         console.log('this.state.isAuthenticated: ', this.state.isAuthenticated);
+    //     }
+    // },
     getters: {
-        doneTodosCount: (state, getters) => {
-            return getters.doneTodos.length
-        }
+        estaLogueado: state => state.isAuthenticated
+        // getIsAuthenticated () {
+        //     // return getters.isAuthenticated
+        //     return this.$store.state.isAuthenticated
+        // }
         // isAuthenticated: state => state.isAuthenticated
     }
 });

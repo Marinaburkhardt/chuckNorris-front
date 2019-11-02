@@ -30,11 +30,12 @@ export default {
   methods: {
     onSubmit() {
       console.log("nick: ", this.nick, " - password: ", this.password);
-      this.$store.dispatch("loguearse", {
-        nick: this.nick,
-        password: this.password
-      });
-      return this.$store.getters.isAuthenticated;
+      this.$store.commit('setIsAuthenticated', {nick: this.nick, password: this.password})
+      // this.$store.dispatch("loguearse", {
+      //   nick: this.nick,
+      //   password: this.password
+      // });
+      // return this.$store.getters.isAuthenticated;
     }
   }
 };
