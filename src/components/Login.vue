@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// import router from '../routes'
+
 export default {
   name: "Login",
 
@@ -31,6 +33,11 @@ export default {
     onSubmit() {
       console.log("nick: ", this.nick, " - password: ", this.password);
       this.$store.commit('setIsAuthenticated', {nick: this.nick, password: this.password})
+      if (this.$store.getters.estaLogueado) {
+        this.$router.push('partidas');
+        // this.router.push({ name: "partidas" });
+        // router.push("partidas")
+      }
       // this.$store.dispatch("loguearse", {
       //   nick: this.nick,
       //   password: this.password
