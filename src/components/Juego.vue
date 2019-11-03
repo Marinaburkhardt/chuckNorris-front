@@ -32,7 +32,7 @@
                         <template slot="front" @flip="onFlip">
                           <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png"/>
                         </template>
-                        <template slot="back" v-if="!figuraLanzada">
+                        <template slot="back" v-if="figuraLanzada">
                           <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
                         </template>
                       </vue-flipcard>
@@ -148,6 +148,9 @@ export default {
 
 .imgJugada {
   position: relative;
+  min-width: 3em;
+  min-height: 7em;
+  display: inline-flex;
 }
 
 .example{
@@ -177,10 +180,6 @@ export default {
 }
 .example .card-group{
   padding: 2em 0;
-}
-
-.card{
-  transform: translateX(0) translateY(0) rotateZ(0);
 }
 
 .card.absolute{
