@@ -5,6 +5,7 @@ import About from './components/About.vue';
 import JuegoFinalizadoGanador from './components/JuegoFinalizadoGanador.vue';
 import JuegoFinalizadoPerdedor from './components/JuegoFinalizadoPerdedor.vue';
 import Partidas from './components/Partidas';
+import Juego from './components/Juego';
 import VueRouter from 'vue-router'
 import Router from 'vue-router';
 
@@ -22,6 +23,7 @@ export const router = new VueRouter({
       { path: '/partidas', component: Partidas},
       { path: '/juegoFinalizadoGanador', component: JuegoFinalizadoGanador },
       { path: '/juegoFinalizadoPerdedor', component: JuegoFinalizadoPerdedor },
+      { path: '/juego', component: Juego },
       { path: '/about', component: About },
       { path: '*', redirect: '/' }
     ]
