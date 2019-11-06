@@ -5,3 +5,4 @@ export default {
         return axios.get('https://api.icndb.com/jokes/random')
     }
 }
+    

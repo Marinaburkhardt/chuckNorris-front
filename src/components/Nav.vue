@@ -11,19 +11,19 @@
       <router-link class="ml-2" to="/inicio" style="color:white">Chuck Norris PPT</router-link>
     </b-navbar-brand>
 
-    <b-navbar-brand class="ml-auto">
-      <router-link to="/about" style="color:white">About</router-link>
-    </b-navbar-brand>
-    <b-navbar-brand class="ml-2">
+    <b-navbar-brand class="ml-auto" v-if="!estaLogueado">
       <router-link to="/login" style="color:white">Login</router-link>
     </b-navbar-brand>
-    <b-navbar-brand class="ml-2">
+    <b-navbar-brand class="ml-auto" v-if="estaLogueado">
+      <router-link to="/about" style="color:white">About</router-link>
+    </b-navbar-brand>
+    <b-navbar-brand class="ml-2" v-if="estaLogueado">
       <router-link to="/partidas" style="color:white">Partidas</router-link>
     </b-navbar-brand>
-    <b-navbar-brand class="ml-2">
+    <b-navbar-brand class="ml-2" v-if="estaLogueado">
       <router-link to="/juegoFinalizadoGanador" style="color:white">Ganador</router-link>
     </b-navbar-brand>
-    <b-navbar-brand class="ml-2">
+    <b-navbar-brand class="ml-2" v-if="estaLogueado">
       <router-link to="/juegoFinalizadoPerdedor" style="color:white">Perdedor</router-link>
     </b-navbar-brand>
     <b-navbar-brand class="ml-2">
@@ -35,6 +35,12 @@
 
 <script>
 export default {
-  name: "Nav"
+  name: "Nav",
+
+  computed: {
+    estaLogueado() {
+      return this.$store.getters.estaLogueado
+    }
+  }
 };
 </script>
