@@ -59,17 +59,17 @@
                     
                     <div class="card col-4">
                     <div class="flipper">
-                        <img class="face" src="../assets/background/finalizadoJoke.png" />
+                        <img class="face" v-bind:src="randomPickerFigura(figurasSombrero)"/>
                     </div>
                     </div>
                     <div class="card col-4">
                     <div class="flipper">
-                        <img class="face" src="../assets/background/finalizadoPerdedor.png"/>
+                        <img class="face" :src="randomPickerFigura(figurasSonrisa)"/>
                     </div>
                     </div>
                     <div class="card col-4">
                     <div class="flipper">
-                        <img class="face" src="../assets/chuck-Inicio2.png"/>
+                        <img class="face" :src="randomPickerFigura(figurasArmas)"/>
                     </div>
                     </div>
                     
@@ -125,13 +125,39 @@ export default {
         { turno: 4, nick: "mkraitman" },
         { turno: 5, nick: "edditrana" }
       ],
-      figuraLanzada : true
+      figuraLanzada : true,
+      figurasSombrero: [
+        "../assets/gestos-jugadas/sombrero/sombrero_01.png",
+        "../assets/gestos-jugadas/sombrero/sombrero_02.png",
+        "../assets/gestos-jugadas/sombrero/sombrero_03.png",
+        "../assets/gestos-jugadas/sombrero/sombrero_04.png",
+        "../assets/gestos-jugadas/sombrero/sombrero_05.png"
+      ],
+      figurasSonrisa: [
+        "../assets/gestos-jugadas/gestos/gestos_01.png",
+        "../assets/gestos-jugadas/gestos/gestos_02.png",
+        "../assets/gestos-jugadas/gestos/gestos_03.png",
+        "../assets/gestos-jugadas/gestos/gestos_04.png"
+      ],
+      figurasArmas: [
+        "../assets/gestos-jugadas/armas/armas_01.png",
+        "../assets/gestos-jugadas/armas/armas_02.png",
+        "../assets/gestos-jugadas/armas/armas_03.png",
+        "../assets/gestos-jugadas/armas/armas_04.png"
+      ],
+      figuraElegida: ''
     };
   },
   methods: {
 
     develarCarta () {
       this.$refs.flipcard.flip()
+    },
+
+    randomPickerFigura (arrayFigura){
+      let numeroRandom = Math.floor(Math.random() * arrayFigura.length)
+      return arrayFigura[numeroRandom]
+      //return "../assets/gestos-jugadas/gestos/gestos_01.png"
     }
 
     }
