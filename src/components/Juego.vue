@@ -126,6 +126,12 @@ export default {
         { turno: 5, nick: "edditrana" }
       ],
       figuraLanzada : true,
+
+      mostrarCartas: false,
+      piedra: '',
+      papel: '',
+      tijera: '',
+      
       figurasSombrero: [
         "../assets/gestos-jugadas/sombrero/sombrero_01.png",
         "../assets/gestos-jugadas/sombrero/sombrero_02.png",
