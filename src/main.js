@@ -7,10 +7,12 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Alerts from "./services/Alerts";
+import VueSweetalert2 from 'vue-sweetalert2';
 
 // Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
+Vue.use(VueSweetalert2)
 // Vue.use(Alerts)
 
 Vue.config.productionTip = false
@@ -18,6 +20,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  Alerts,
   render: h => h(App),
 }).$mount('#app');

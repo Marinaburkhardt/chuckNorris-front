@@ -38,7 +38,8 @@ export default {
       });
       if (this.$store.getters.estaLogueado) {
         this.$router.push("partidas");
-        Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
+        // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
+        this.$swal('Hello Vue world!!!','Exitos','error');
       } else {
         // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
       }
