@@ -9,7 +9,7 @@
           <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />zz
         </router-link>
       </div>
-      <div class="col-sm-3 offset-4">
+      <div class="col-sm-3 offset-4" v-if="cargado">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -18,11 +18,11 @@
               <th style="text-align: center" scope="col">Ganadas</th>
             </tr>
           </thead>
-          <tbody v-for="jugador in mejoresJugadores" :key="jugador.nombre">
+          <tbody v-for="jugador in mejoresJugadores" :key="jugador.NickJugador">
             <tr>
               <th style="text-align: center">{{jugador.posicion}}</th>
-              <td style="text-align: center">{{jugador.nick}}</td>
-              <td style="text-align: center">{{jugador.ganadas}}</td>
+              <td style="text-align: center">{{jugador.NickJugador}}</td>
+              <td style="text-align: center">{{jugador.PartidasGanadas}}</td>
             </tr>
           </tbody>
         </table>
@@ -33,18 +33,25 @@
 </template>
 
 <script>
+import RestServices from "@/services/RestServices";
+
 export default {
   name: "Inicio",
   data: function() {
     return {
-      mejoresJugadores: [
-        { posicion: 1, nick: "mkraitman", ganadas: 25 },
-        { posicion: 2, nick: "mburkhardt", ganadas: 20 },
-        { posicion: 3, nick: "edditrana", ganadas: 18 },
-        { posicion: 4, nick: "maquino", ganadas: 15 },
-        { posicion: 5, nick: "gaspar", ganadas: 10 }
-      ]
+      cargado: false, 
+      mejoresJugadores: ''
     };
+  },
+
+  created() {
+    RestServices.getTop5()
+      .then(response => {
+      this.mejoresJugadores = response
+      this.cargado = true
+      console.log(this.mejoresJugadores)
+    })
+    .catch(error => console.log(error));
   }
 };
 </script>
