@@ -12,7 +12,7 @@
 </template>
 
 <script>
-// import router from '../routes'
+import {Alerts} from "../services/Alerts";
 
 export default {
   name: "Login",
@@ -32,13 +32,18 @@ export default {
   methods: {
     onSubmit() {
       console.log("nick: ", this.nick, " - password: ", this.password);
-      this.$store.commit('setIsAuthenticated', {nick: this.nick, password: this.password})
+      this.$store.commit("setIsAuthenticated", {
+        nick: this.nick,
+        password: this.password
+      });
       if (this.$store.getters.estaLogueado) {
-        this.$router.push('partidas')
+        this.$router.push("partidas");
+        // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
+        this.$swal('Hello Vue world!!!','Exitos','error');
       } else {
-        // TODO: cartel de alerta (o error en el formulario) indicando que el usuario y/o contraseña es incorrecto
+        // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
       }
-    }
+    },
   }
 };
 </script>
