@@ -31,7 +31,7 @@
               <template slot="front" @flip="onFlip">
                 <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png" />
               </template>
-              <template slot="back" v-if="figuraLanzada">
+              <template slot="back">
                 <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
               </template>
             </vue-flipcard>
@@ -40,35 +40,38 @@
           <div class="col-4">
             <vue-flipcard>
               <template slot="front" @flip="onFlip">
-                <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png" />
+                <!-- <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png" /> -->
               </template>
-              <template slot="back">
-                <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
+              <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaArma">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)">
+              </template>
+              <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaGesto">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)">
+              </template>
+              <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaSombrero">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)">
               </template>
             </vue-flipcard>
           </div>
+
         </div>
 
         <br />
         <h5>Elije tu figura!</h5>
         <br />
-        <div class="cards">
-          <div class="card col-4">
-            <div class="imgJugada">
-              <img :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)" alt="">
+        
+        <div class="cards" id="figuraJugada">
+            <div v-on:click="setearAFiguraLanzada('sombrero')" class="card col-4">
+              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)">
             </div>
-          </div>
-          <div class="card col-4">
-            <div class="imgJugada">
-              <img :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)" alt="">
+            <div v-on:click="setearAFiguraLanzada('gesto')" class="card col-4">
+              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`) ">
             </div>
-          </div>
-          <div class="card col-4">
-            <div class="imgJugada">
-              <img :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)" alt="">
+            <div v-on:click="setearAFiguraLanzada('arma')" class="card col-4">
+              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)">
             </div>
-          </div>
         </div>
+
       </div>
 
       <!-- Instrucciones -->
@@ -120,7 +123,10 @@ export default {
         { turno: 4, nick: "mkraitman" },
         { turno: 5, nick: "edditrana" }
       ],
-      figuraLanzada : true,
+      figuraLanzada : false,
+      figuraLanzadaSombrero : false,
+      figuraLanzadaGesto: false,
+      figuraLanzadaArma: false,
 
       numeroRandom: '',
       
@@ -142,7 +148,8 @@ export default {
         "../assets/gestos-jugadas/armas/armas_03.png",
         "../assets/gestos-jugadas/armas/armas_04.png"
       ],
-      figuraElegida: ''
+      figuraElegida: '',
+      pathAFiguraJugadaJugador2: ''
     };
     
   },
@@ -151,14 +158,31 @@ export default {
   },
   methods: {
 
-    develarCarta () {
-      this.$refs.flipcard.flip()
+    setearAFiguraLanzada(eleccion) {
+      this.figuraLanzada = true;
+      this.figuraElegida = eleccion;
+      console.log("pasó a true? -->" + this.figuraLanzada)
+      if (eleccion == "sombrero"){
+        // this.pathAFiguraJugadaJugador2 = "../assets/gestos-jugadas/sombrero/sombrero_" + this.numeroRandom
+        this.figuraLanzadaSombrero = true;
+      } else if (eleccion == "arma"){
+        // this.pathAFiguraJugadaJugador2 = "`@assets/gestos-jugadas/armas/armas_"
+        this.figuraLanzadaArma = true;
+      } else {
+        // this.pathAFiguraJugadaJugador2 = "@/assets/gestos-jugadas/gestos/gestos_" + this.numeroRandom
+        this.figuraLanzadaGesto = true;
+      }
+      console.log(this.figuraElegida)
+      console.log(this.pathAFiguraJugadaJugador2)
     },
 
     randomPickerFigura (){
       this.numeroRandom = (Math.floor(Math.random() * 4)+1)
       this.numeroRandom = '0' + this.numeroRandom + '.png';
-      
+    },
+
+    devolverJugadaJugador2(){
+
     }
   }
 }
@@ -175,48 +199,18 @@ export default {
 
 .cards {
   display: inline-flex;
+  position: relative;
   border: 0.25em solid rgba(0, 0, 0, 0.25);
   border-radius: 0.35em;
   padding: 1em 2em;
 }
 
 .card {
-  cursor: pointer;
-  color: #333;
-  font-size: 4em;
-}
-
-.card.absolute {
+  display: inline-flex;
   position: relative;
-  top: 0;
-  left: 0;
-  transition: none;
-}
-
-.card.hidden {
-  visibility: hidden;
-}
-
-.card .face,
-.card .back {
-  align-items: center;
-  justify-content: center;
-  /* font-weight: 800; */
-}
-
-.card:hover .face,
-.card:hover .back {
-  color: hotpink;
-}
-
-.card:hover .face:after,
-.card:hover .back:after {
-  position: relative;
-  /* top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; */
-  border: 0.07em solid;
-  border-radius: 0.08em;
+  background-size:cover;
+  max-width:100%;
+  max-height:100%;
+  
 }
 </style>
