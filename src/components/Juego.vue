@@ -28,8 +28,9 @@
         <div class="row justify-content-around">
           <div class="col-4">
             <vue-flipcard>
-              <template slot="front" @flip="onFlip">
-                <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png" />
+              <!-- @flip="onFlip" -->
+              <template slot="front">
+                <img class="imgJugada" src="../assets/interrogation.png" />
               </template>
               <template slot="back">
                 <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
@@ -39,8 +40,8 @@
 
           <div class="col-4">
             <vue-flipcard>
-              <template slot="front" @flip="onFlip">
-                <!-- <img class="imgJugada" src="../assets/background/finalizadoPerdedor.png" /> -->
+              <template slot="front">
+                <img class="imgJugada" src="../assets/tuTurno.jpg" />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaArma">
                 <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)">
@@ -80,7 +81,7 @@
           <u>Instrucciones</u>
         </h5>
         <br />
-        <p>Los valores de las figuras tienen valores equivalentes al juego "piedra, papel o tijer"</p>
+        <p>Los valores de las figuras tienen valores equivalentes al juego "piedra, papel o tijera"</p>
 
         <table>
           <thead>
@@ -161,19 +162,17 @@ export default {
     setearAFiguraLanzada(eleccion) {
       this.figuraLanzada = true;
       this.figuraElegida = eleccion;
-      console.log("pasó a true? -->" + this.figuraLanzada)
+      // console.log("pasó a true? -->" + this.figuraLanzada)
       if (eleccion == "sombrero"){
-        // this.pathAFiguraJugadaJugador2 = "../assets/gestos-jugadas/sombrero/sombrero_" + this.numeroRandom
         this.figuraLanzadaSombrero = true;
       } else if (eleccion == "arma"){
-        // this.pathAFiguraJugadaJugador2 = "`@assets/gestos-jugadas/armas/armas_"
         this.figuraLanzadaArma = true;
       } else {
-        // this.pathAFiguraJugadaJugador2 = "@/assets/gestos-jugadas/gestos/gestos_" + this.numeroRandom
         this.figuraLanzadaGesto = true;
       }
-      console.log(this.figuraElegida)
-      console.log(this.pathAFiguraJugadaJugador2)
+      // console.log(this.figuraElegida)
+      // console.log(this.pathAFiguraJugadaJugador2)
+
     },
 
     randomPickerFigura (){
@@ -181,8 +180,8 @@ export default {
       this.numeroRandom = '0' + this.numeroRandom + '.png';
     },
 
-    devolverJugadaJugador2(){
-
+    onManualFlip () {
+      this.$refs.flipcard.flip()
     }
   }
 }
@@ -195,6 +194,7 @@ export default {
   max-width:100%;
   max-height:100%;
   display: inline-flex;
+  justify-content: center;
 }
 
 .cards {
