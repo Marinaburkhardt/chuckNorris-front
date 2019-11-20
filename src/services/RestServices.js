@@ -6,7 +6,6 @@ export default {
     },
 
     async login(json) {
-        console.log('json:', json)
         return await axios.post('http://localhost:3000/api/jugador/login',json)
     }
 }

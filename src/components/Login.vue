@@ -31,11 +31,6 @@ export default {
 
   methods: {
     async onSubmit() {
-      console.log("nick: ", this.nick, " - password: ", this.password);
-      // this.$store.commit("setIsAuthenticated", {
-      //   nick: this.nick,
-      //   password: this.password
-      // });
       await this.$store.dispatch('login',{
         nick: this.nick,
         password: this.password

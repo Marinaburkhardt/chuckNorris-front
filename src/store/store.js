@@ -13,7 +13,6 @@ export default new Vuex.Store({
     },
     mutations: {
         setIsAuthenticated(state, login) {
-            console.log('login: ', login);
             state.isAuthenticated = login.autenticado,
             state.nick = login.nick,
             state.mail = login.mail
@@ -21,20 +20,16 @@ export default new Vuex.Store({
     },
     actions: {
         async login(state, jsonLogin) {
-            console.log('jsonLogin: ', jsonLogin)
             await restServices.default.login(jsonLogin).then(function (response) {
                 if (response.status == 200) {
                     state.commit("setIsAuthenticated", {
                         nick: response.data.NickJugador,
                         mail: response.data.Mail,
                         autenticado: true
-                      })
-                } else {
-
+                    })
                 }
-            })
-                .catch(function (error) {
-                    console.log(error);
+            }).catch(function (error) {
+                console.log(error);
                 });
         },
     },
