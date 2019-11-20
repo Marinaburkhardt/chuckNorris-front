@@ -5,9 +5,9 @@ export default {
         return axios.get('https://api.icndb.com/jokes/random')
     },
 
-    login(json) {
+    async login(json) {
         console.log('json:', json)
-        return axios.post('http://localhost:3000/api/jugador/login',json)
+        return await axios.post('http://localhost:3000/api/jugador/login',json)
     }
 }
     

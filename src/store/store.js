@@ -22,7 +22,7 @@ export default new Vuex.Store({
     actions: {
         async login(state, jsonLogin) {
             console.log('jsonLogin: ', jsonLogin)
-            restServices.default.login(jsonLogin).then(function (response) {
+            await restServices.default.login(jsonLogin).then(function (response) {
                 if (response.status == 200) {
                     state.commit("setIsAuthenticated", {
                         nick: response.data.NickJugador,
