@@ -6,7 +6,6 @@ import store from './store/store';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Alerts from "./services/Alerts";
 import VueSweetalert2 from 'vue-sweetalert2';
 
 // Vue.use(VueRouter)

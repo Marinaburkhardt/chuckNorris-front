@@ -32,16 +32,19 @@ export default {
   methods: {
     onSubmit() {
       console.log("nick: ", this.nick, " - password: ", this.password);
-      this.$store.commit("setIsAuthenticated", {
+      // this.$store.commit("setIsAuthenticated", {
+      //   nick: this.nick,
+      //   password: this.password
+      // });
+      this.$store.dispatch('login',{
         nick: this.nick,
         password: this.password
-      });
+      })
       if (this.$store.getters.estaLogueado) {
         this.$router.push("partidas");
-        // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
-        this.$swal('Hello Vue world!!!','Exitos','error');
+        this.$swal('Bienvenido','Exitos','success');
       } else {
-        // Alerts.showAlert('Error','Usuario y/o contraseña incorrecta, intentá nuevamente','error');
+        this.$swal('Error','Nick y/o contraseña incorrecta','error');
       }
     },
   }

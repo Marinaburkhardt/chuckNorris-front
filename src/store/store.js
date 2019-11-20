@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import {restServices} from '../services/RestServices.js'
 
 const restServices = require('../services/RestServices.js')
 
@@ -9,30 +8,39 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isAuthenticated: false,
+        nick: '',
+        mail: '',
     },
     mutations: {
-        setIsAuthenticated(state, jsonLogin) {
-            console.log('jsonLogin: ', jsonLogin);
-            console.log('state: ', state);
-            restServices.default.login({
-                "nick": "edditrana",
-                "password": "admin"
-            }).then(function (response) {
-                console.log('response: ', response);
+        setIsAuthenticated(state, login) {
+            console.log('login: ', login);
+            state.isAuthenticated = login.autenticado,
+            state.nick = login.nick,
+            state.mail = login.mail
+        }
+    },
+    actions: {
+        async login(state, jsonLogin) {
+            console.log('jsonLogin: ', jsonLogin)
+            restServices.default.login(jsonLogin).then(function (response) {
                 if (response.status == 200) {
-                    state.isAuthenticated = true;
+                    state.commit("setIsAuthenticated", {
+                        nick: response.data.NickJugador,
+                        mail: response.data.Mail,
+                        autenticado: true
+                      })
                 } else {
-                    
+
                 }
             })
                 .catch(function (error) {
                     console.log(error);
                 });
-
-            // TODO: pegada al back para validar si existe o no el jugador
-        }
+        },
     },
     getters: {
-        estaLogueado: state => state.isAuthenticated
+        estaLogueado: state => state.isAuthenticated,
+        getNick: state => state.nick,
+        getMail: state => state.mail
     }
 });
