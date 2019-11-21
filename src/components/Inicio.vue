@@ -9,7 +9,7 @@
           <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />zz
         </router-link>
       </div>
-      <div class="col-sm-3 offset-4" v-if="cargado">
+      <div class="col-sm-3 offset-4">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -20,7 +20,7 @@
           </thead>
           <tbody v-for="jugador in mejoresJugadores" :key="jugador.NickJugador">
             <tr>
-              <th style="text-align: center">{{jugador.posicion}}</th>
+              <th style="text-align: center">{{mejoresJugadores.indexOf(jugador)+1}}</th>
               <td style="text-align: center">{{jugador.NickJugador}}</td>
               <td style="text-align: center">{{jugador.PartidasGanadas}}</td>
             </tr>
@@ -40,16 +40,18 @@ export default {
   data: function() {
     return {
       cargado: false, 
-      mejoresJugadores: ''
+      mejoresJugadores: '',
+      posiciones: [1,2,3,4,5]
     };
   },
 
   created() {
     RestServices.getTop5()
       .then(response => {
-      this.mejoresJugadores = response
+      console.log(response.data)
+      this.mejoresJugadores = response.data
       this.cargado = true
-      console.log(this.mejoresJugadores)
+      console.log("los jugadores traidos son: " + this.mejoresJugadores)
     })
     .catch(error => console.log(error));
   }
