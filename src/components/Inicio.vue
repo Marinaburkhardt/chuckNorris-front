@@ -23,11 +23,11 @@
               <th style="text-align: center" scope="col">Ganadas</th>
             </tr>
           </thead>
-          <tbody v-for="jugador in mejoresJugadores" :key="jugador.nombre">
+          <tbody v-for="jugador in mejoresJugadores" :key="jugador.NickJugador">
             <tr>
-              <th style="text-align: center">{{jugador.posicion}}</th>
-              <td style="text-align: center">{{jugador.nick}}</td>
-              <td style="text-align: center">{{jugador.ganadas}}</td>
+              <th style="text-align: center">{{mejoresJugadores.indexOf(jugador)+1}}</th>
+              <td style="text-align: center">{{jugador.NickJugador}}</td>
+              <td style="text-align: center">{{jugador.PartidasGanadas}}</td>
             </tr>
           </tbody>
         </table>
@@ -38,23 +38,28 @@
 </template>
 
 <script>
+import RestServices from "@/services/RestServices";
+
 export default {
   name: "Inicio",
   data: function() {
     return {
-      mejoresJugadores: [
-        { posicion: 1, nick: "mkraitman", ganadas: 25 },
-        { posicion: 2, nick: "mburkhardt", ganadas: 20 },
-        { posicion: 3, nick: "edditrana", ganadas: 18 },
-        { posicion: 4, nick: "maquino", ganadas: 15 },
-        { posicion: 5, nick: "gaspar", ganadas: 10 }
-      ]
+      mejoresJugadores: '',
     };
   },
   computed: {
     estaLogueado() {
       return this.$store.getters.estaLogueado
     }
+  },
+  created() {
+    RestServices.getTop5()
+      .then(response => {
+      // console.log(response.data)
+      this.mejoresJugadores = response.data
+      // console.log("los jugadores traidos son: " + this.mejoresJugadores)
+    })
+    .catch(error => console.log(error));
   }
 };
 </script>
