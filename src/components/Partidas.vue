@@ -131,8 +131,14 @@ tbody {
 
 
 <script>
+import RestServices from '../services/RestServices';
+
 export default {
   name: "partidas",
+  
+  async created() {
+    
+  },
   data: function() {
     return {
       jugadores: [
@@ -221,7 +227,12 @@ export default {
     },
     toggleModal() {
       this.$refs[this.modalName].toggle("#toggle-btn");
-    }
+    },
+  },
+  computed: {
+    estaLogueado() {
+      return this.$store.getters.estaLogueado
+    },
   }
 };
 </script>

@@ -10,28 +10,48 @@ export default new Vuex.Store({
         isAuthenticated: false,
         nick: '',
         mail: '',
+        partidas: '',
+        jugadores: '',
     },
     mutations: {
         setIsAuthenticated(state, login) {
             state.isAuthenticated = login.autenticado,
             state.nick = login.nick,
-            state.mail = login.mail
+            state.mail = login.mail,
+            state.jugadores = login.jugadores,
+            state.partidas = login.partidas
         }
     },
     actions: {
         async login(state, jsonLogin) {
-            await restServices.default.login(jsonLogin).then(function (response) {
-                if (response.status == 200) {
-                    state.commit("setIsAuthenticated", {
-                        nick: response.data.NickJugador,
-                        mail: response.data.Mail,
-                        autenticado: true
-                    })
-                }
-            }).catch(function (error) {
-                console.log(error);
-                });
+            try {
+                let responseLogin = await restServices.default.login(jsonLogin)
+                console.log('responseLogin: ', responseLogin.data)
+                    if (responseLogin.status == 200) {
+                        let responseObtenerPartidas = await restServices.default.obtenerPartidas(responseLogin.data.NickJugador);
+                        console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
+                        let responseObtenerJugadores = await restServices.default.obtenerJugadores(responseLogin.data.NickJugador);
+                        console.log('responseObtenerJugadores: ', responseObtenerJugadores.data)
+                        state.commit("setIsAuthenticated", {
+                            nick: responseLogin.data.NickJugador,
+                            mail: responseLogin.data.Mail,
+                            autenticado: true,
+                            jugadores: responseObtenerJugadores.data,
+                            partidas: responseObtenerPartidas.data
+                        })
+                    }
+            } catch (error) {
+                console.log(error)
+            }
         },
+        // async cargarPartidas () {
+        //     let responseObtenerPartidas = await restServices.default.obtenerPartidas(responseLogin.data.NickJugador);
+        //     console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
+        // },
+        // async cargarJugadores () {
+        //     let responseObtenerJugadores = await restServices.default.obtenerJugadores(responseLogin.data.NickJugador);
+        //     console.log('responseObtenerJugadores: ', responseObtenerJugadores.data)
+        // }
     },
     getters: {
         estaLogueado: state => state.isAuthenticated,

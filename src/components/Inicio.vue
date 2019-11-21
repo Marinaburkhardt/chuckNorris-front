@@ -4,8 +4,13 @@
     <h1 style="text-align: center">BIENVENIDO A TU MUERTE</h1>
     <br />
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
-      <div class="col-sm-2 offset-2">
+      <div v-if="!estaLogueado" class="col-sm-2 offset-2">
         <router-link to="/login" style="color:white" disabled="estaLogueado">
+          <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />zz
+        </router-link>
+      </div>
+      <div v-if="estaLogueado" class="col-sm-2 offset-2">
+        <router-link to="/partidas" style="color:white" disabled="estaLogueado">
           <img class="align-middle" :src="require('../assets/chuck-Inicio2.png')" />zz
         </router-link>
       </div>
