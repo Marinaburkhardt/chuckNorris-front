@@ -7,6 +7,11 @@ export default {
 
     async login(json) {
         return await axios.post('http://localhost:3000/api/jugador/login',json)
+    },
+
+    getTop5() {
+        console.log("getTop5")
+        return axios.get('http://localhost:3000/api/jugador/top5')
     }
 }
     

@@ -39,28 +39,22 @@ export default {
   name: "Inicio",
   data: function() {
     return {
-      cargado: false, 
       mejoresJugadores: '',
-      posiciones: [1,2,3,4,5]
     };
   },
-<<<<<<< HEAD
   computed: {
     estaLogueado() {
       return this.$store.getters.estaLogueado
     }
-=======
-
+  },
   created() {
     RestServices.getTop5()
       .then(response => {
-      console.log(response.data)
+      // console.log(response.data)
       this.mejoresJugadores = response.data
-      this.cargado = true
-      console.log("los jugadores traidos son: " + this.mejoresJugadores)
+      // console.log("los jugadores traidos son: " + this.mejoresJugadores)
     })
     .catch(error => console.log(error));
->>>>>>> integration-apis
   }
 };
 </script>
