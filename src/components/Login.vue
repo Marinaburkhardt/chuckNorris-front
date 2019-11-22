@@ -1,11 +1,14 @@
 <template>
   <div id="login">
+    <div class="vld-parent">
+    <loading :active.sync="visible" :can-cancel="true"></loading>
+    </div>
     <div class="form">
       <h2>Login</h2>
       <form @submit.prevent="onSubmit">
         <input v-model="nick" type="text" placeholder="Ingrese su nick" required />
         <input v-model="password" type="password" placeholder="Ingrese su password" required />
-        <button value="Submit" type="submit" style="background-color: black; color: white" :disabled="botonDeshabilitado">Login</button>
+        <button value="Submit" type="submit" style="background-color: black; color: white" :disabled="botonDeshabilitado" @click.prevent="open()">Login</button>
       </form>
     </div>
   </div>
@@ -13,11 +16,15 @@
 
 <script>
 import {Alerts} from "../services/Alerts";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
   name: "Login",
   data() {
     return {
+      isLoading: false,
+      fullPage: true,
       botonDeshabilitado: false,
       nick: "",
       password: "",
@@ -27,6 +34,9 @@ export default {
         { nick: "mkraitman", password: 123 }
       ]
     };
+  },
+  components: {
+    Loading
   },
 
   methods: {
@@ -45,6 +55,20 @@ export default {
         this.$swal('Error','Nick y/o contraseña incorrecta','error');
         this.botonDeshabilitado = false;
       }
+    },
+    doAjax() {
+      this.isLoading = true;
+      // simulate AJAX
+      setTimeout(() => {
+        this.isLoading = false
+      },5000)
+    },
+    open() {
+      console.log('open was clicked, will auto hide');
+      let loader = this.$loading.show({
+          loader: 'dots'
+      });
+      setTimeout(() => loader.hide(), 3 * 1000)
     },
   }
 };

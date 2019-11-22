@@ -4,7 +4,7 @@
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <div class="col-4 mt-4 mr-4 container-fluid">
         <h3>Partidas</h3>
-
+        <pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader>
         <table class="table table-hover">
           <!-- <thead>
             <th>jugador</th>
@@ -113,6 +113,9 @@ NickJugador2: (
         <b-button class="mt-2" variant="outline-warning" block @click="toggleModal">CANCELAR</b-button>
       </b-modal>
     </div>
+
+    
+
   </div>
 </template>
 
@@ -140,6 +143,9 @@ tbody {
 
 <script>
 import RestServices from '../services/RestServices';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 
 export default {
   name: "partidas",
@@ -150,6 +156,8 @@ export default {
   },
   data: function() {
     return {
+      isLoading: false,
+      fullPage: true,
       jugadores: [
         { nombre: "mkraitman" },
         { nombre: "sgutierrez" },
@@ -230,7 +238,7 @@ export default {
       this.jugadorLogueado = this.$store.getters.getNick
       this.jugadores = this.$store.getters.getJugadores
     },
-  }
+  },
 };
 </script>
 
