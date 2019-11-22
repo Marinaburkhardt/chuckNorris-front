@@ -10,21 +10,29 @@
             <th>jugador</th>
             <th>estado</th>
           </thead>-->
+          <!-- 
+IdPartida: (...)
+JugadorPorJugar: (...)
+NickJugador: (...)
+NickJugador2: ( 
+  obtenerJugadorLogueado()
+  
+  -->
           <tbody>
             <tr v-for="partida in partidas" :key="partida">
-              <td>{{partida.jugador}}</td>
+              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}}</td>
               <td class="text-right pr-5">
                 <b-button 
-                  v-if="partida.estado =='success'"
-                  v-on:click="setModalTurno(partida.jugador, partida.estado)"
+                  v-if="partida.JugadorPorJugar != jugadorLogueado"
+                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado)"
                   @click="toggleModal"
                   style="width: 100px"
                   type="button"
                   :class="`btn btn-${partida.estado}`"
                 >En espera</b-button>
                 <b-button
-                  v-if="partida.estado == 'danger'"
-                  v-on:click="setModalTurno(partida.jugador, partida.estado)"
+                  v-if="partida.JugadorPorJugar == jugadorLogueado"
+                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado)"
                   @click="toggleModal"
                   style="width: 100px"
                   type="button"
@@ -40,10 +48,10 @@
           <h3>Jugadores</h3>
           <tbody class>
             <tr v-for="jugador in jugadores" :key="jugador">
-              <td>{{jugador.nombre}}</td>
+              <td>{{jugador.NickJugador}}</td>
               <td class="text-right pr-5">
                 <button
-                  v-on:click="setModalNuevaPartida(jugador.nombre)"
+                  v-on:click="setModalNuevaPartida(jugador.NickJugador)"
                   @click="toggleModal"
                   style="width: 70px"
                   type="button"
@@ -137,7 +145,8 @@ export default {
   name: "partidas",
   
   async created() {
-    
+    await this.obtenerDatos();
+    // this.obtenerJugadores();
   },
   data: function() {
     return {
@@ -178,38 +187,21 @@ export default {
         { nombre: "ratonperez" },
         { nombre: "AAAAAaaaaa" }
       ],
-
-      /** danger = tu turno | success = en espera **/
-      partidas: [
-        { jugador: "AAAAAaaaaa", estado: "danger" },
-        { jugador: "SAASDADA", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "success" },
-        { jugador: "xpersona", estado: "danger" },
-        { jugador: "xpersona", estado: "danger" }
-      ],
+      jugadorLogueado: '',
+      partidas: '',
       versus: "",
       showModal: false,
       modalName: ""
     };
   },
   methods: {
-    setModalTurno(vs, estado) {
-      this.versus = vs;
-      if (estado != "success") {
+    setModalTurno(jugador1, jugador2, esIgualAlLogueado) {
+      if (jugador1 == this.jugadorLogueado) {
+        this.versus = jugador2;
+      } else {
+        this.versus = jugador1;
+      }
+      if (esIgualAlLogueado) {
         this.modalName = "turno-modal";
       } else {
         this.modalName = "no-turno-modal";
@@ -233,9 +225,13 @@ export default {
     estaLogueado() {
       return this.$store.getters.estaLogueado
     },
+    obtenerDatos() {
+      this.partidas = this.$store.getters.getPartidas
+      this.jugadorLogueado = this.$store.getters.getNick
+      this.jugadores = this.$store.getters.getJugadores
+    },
   }
 };
 </script>
-
 
 

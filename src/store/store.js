@@ -29,8 +29,8 @@ export default new Vuex.Store({
                 console.log('responseLogin: ', responseLogin.data)
                     if (responseLogin.status == 200) {
                         let responseObtenerPartidas = await restServices.default.obtenerPartidas(responseLogin.data.NickJugador);
-                        console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
                         let responseObtenerJugadores = await restServices.default.obtenerJugadores(responseLogin.data.NickJugador);
+                        console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
                         console.log('responseObtenerJugadores: ', responseObtenerJugadores.data)
                         state.commit("setIsAuthenticated", {
                             nick: responseLogin.data.NickJugador,
@@ -56,6 +56,8 @@ export default new Vuex.Store({
     getters: {
         estaLogueado: state => state.isAuthenticated,
         getNick: state => state.nick,
-        getMail: state => state.mail
+        getMail: state => state.mail,
+        getJugadores: state => state.jugadores,
+        getPartidas: state => state.partidas
     }
 });
