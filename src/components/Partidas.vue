@@ -8,11 +8,11 @@
         <table class="table table-hover">
           <tbody>
             <tr v-for="partida in partidas" :key="partida">
-              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}}</td>
+              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}} - ID partida: {{partida.IdPartida}}</td>
               <td class="text-right pr-5">
                 <b-button 
                   v-if="partida.JugadorPorJugar != jugadorLogueado"
-                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado)"
+                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado, partida.IdPartida)"
                   @click="toggleModal"
                   style="width: 100px"
                   type="button"
@@ -20,7 +20,7 @@
                 >En espera</b-button>
                 <b-button
                   v-if="partida.JugadorPorJugar == jugadorLogueado"
-                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado)"
+                  v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado, partida.IdPartida)"
                   @click="toggleModal"
                   style="width: 100px"
                   type="button"
@@ -144,11 +144,13 @@ export default {
       partidas: '',
       versus: "",
       showModal: false,
-      modalName: ""
+      modalName: "",
+      idPartidaSeleccionada: "",
     };
   },
   methods: {
-    setModalTurno(jugador1, jugador2, esIgualAlLogueado) {
+    setModalTurno(jugador1, jugador2, esIgualAlLogueado, idPartida) {
+      this.idPartidaSeleccionada = idPartida
       if (jugador1 == this.jugadorLogueado) {
         this.versus = jugador2;
       } else {
@@ -175,8 +177,8 @@ export default {
       this.$refs[this.modalName].toggle("#toggle-btn");
     },
     continuarPartida(){
-      console.log("consoleameeee"+this.partidas);
-      this.$router.push("juego/:${idPartida}");
+      // console.log('this.idPartidaSeleccionada: ', this.idPartidaSeleccionada);
+      this.$router.push("juego/:"+this.idPartidaSeleccionada);
       hideModal();
     },
     async comenzarPartida (nickJugador1, nickJugador2) {
