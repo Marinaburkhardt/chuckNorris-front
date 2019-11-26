@@ -7,11 +7,14 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueFlipcard from 'vue-flipcard';
+import VueSweetalert2 from 'vue-sweetalert2';
 
 // Vue.use(VueRouter)
 Vue.component('vue-flipcard', VueFlipcard)
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
+Vue.use(VueSweetalert2)
+// Vue.use(Alerts)
 
 Vue.config.productionTip = false
 

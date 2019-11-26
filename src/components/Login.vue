@@ -5,20 +5,20 @@
       <form @submit.prevent="onSubmit">
         <input v-model="nick" type="text" placeholder="Ingrese su nick" required />
         <input v-model="password" type="password" placeholder="Ingrese su password" required />
-        <button value="Submit" type="submit" style="background-color: black; color: white">Login</button>
+        <button value="Submit" type="submit" style="background-color: black; color: white" :disabled="botonDeshabilitado">Login</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-// import router from '../routes'
+import {Alerts} from "../services/Alerts";
 
 export default {
   name: "Login",
-
   data() {
     return {
+      botonDeshabilitado: false,
       nick: "",
       password: "",
       jugadores: [
@@ -30,15 +30,22 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      console.log("nick: ", this.nick, " - password: ", this.password);
-      this.$store.commit('setIsAuthenticated', {nick: this.nick, password: this.password})
+    async onSubmit() {
+      console.log('this.botonDeshabilitado antes - ', this.botonDeshabilitado)
+      this.botonDeshabilitado = true;
+      console.log('this.botonDeshabilitado despues - ', this.botonDeshabilitado)
+      await this.$store.dispatch('login',{
+        nick: this.nick,
+        password: this.password
+      })
       if (this.$store.getters.estaLogueado) {
-        this.$router.push('partidas')
+        this.$router.push("partidas");
+        this.$swal('Bienvenido','Es hora de patear traseros','success');
       } else {
-        // TODO: cartel de alerta (o error en el formulario) indicando que el usuario y/o contraseña es incorrecto
+        this.$swal('Error','Nick y/o contraseña incorrecta','error');
+        this.botonDeshabilitado = false;
       }
-    }
+    },
   }
 };
 </script>
