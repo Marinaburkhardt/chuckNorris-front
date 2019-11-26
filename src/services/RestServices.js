@@ -6,7 +6,6 @@ export default {
     },
 
     getTop5() {
-        console.log("getTop5")
         return axios.get('http://localhost:3000/api/jugador/top5')
     },
 
