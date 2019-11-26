@@ -163,7 +163,6 @@ export default {
       }
     },
     setModalNuevaPartida(vs) {
-      console.log('vs: ', vs)
       this.versus = vs;
       this.modalName = "nueva-partida-modal";
     },
@@ -177,16 +176,14 @@ export default {
       this.$refs[this.modalName].toggle("#toggle-btn");
     },
     continuarPartida(){
-      // console.log('this.idPartidaSeleccionada: ', this.idPartidaSeleccionada);
       this.$router.push("juego/:"+this.idPartidaSeleccionada);
       hideModal();
     },
     async comenzarPartida (nickJugador1, nickJugador2) {
       let json = { nickJugador1: this.jugadorLogueado, nickJugador2: this.versus }
-      console.log('json: ', json)
       let respuestaComenzar = await RestServices.default.comenzarPartida(json);
-      console.log('respuestaComenzar.data[0].IdPartida: ', respuestaComenzar.data[0].IdPartida);
-      this.hideModal();
+      this.idPartidaSeleccionada = respuestaComenzar.data[0].IdPartida;
+      this.continuarPartida();
     }
   },
   computed: {
