@@ -6,18 +6,6 @@
         <h3>Partidas</h3>
 
         <table class="table table-hover">
-          <!-- <thead>
-            <th>jugador</th>
-            <th>estado</th>
-          </thead>-->
-          <!-- 
-IdPartida: (...)
-JugadorPorJugar: (...)
-NickJugador: (...)
-NickJugador2: ( 
-  obtenerJugadorLogueado()
-  
-  -->
           <tbody>
             <tr v-for="partida in partidas" :key="partida">
               <td>{{partida.NickJugador}} vs {{partida.NickJugador2}}</td>
@@ -80,7 +68,7 @@ NickJugador2: (
           />
           <h3>Tu turno vs {{versus}}!</h3>
         </div>
-        <b-button class="mt-3" variant="outline-danger" block @click="hideModal">JUGAR</b-button>
+        <b-button class="mt-3" variant="outline-danger" block @click="continuarPartida">JUGAR</b-button>
         <b-button class="mt-2" variant="outline-warning" block @click="toggleModal">CANCELAR</b-button>
       </b-modal>
     </div>
@@ -184,6 +172,11 @@ export default {
     toggleModal() {
       this.$refs[this.modalName].toggle("#toggle-btn");
     },
+    continuarPartida(){
+      console.log("consoleameeee"+this.partidas[0]);
+      this.$router.push("juego/:${idPartida}");
+      hideModal();
+    }
   },
   computed: {
     estaLogueado() {
