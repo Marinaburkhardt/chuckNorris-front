@@ -23,7 +23,7 @@ export const router = new VueRouter({
       { path: '/partidas', component: Partidas},
       { path: '/juegoFinalizadoGanador', component: JuegoFinalizadoGanador },
       { path: '/juegoFinalizadoPerdedor', component: JuegoFinalizadoPerdedor },
-      { path: '/juego', component: Juego },
+      // { path: '/juego', component: Juego },
       { path: '/juego/:id', component: Juego, props: true },
       { path: '/about', component: About },
       { path: '*', redirect: '/' }
