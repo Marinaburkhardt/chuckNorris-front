@@ -30,6 +30,11 @@ export default {
     async obtenerDetallePartidas (idPartida) {
         // console.log('nickJugador: ', nickJugador)
         return await axios.get('http://localhost:3000/api/partida/detalles/' + idPartida)
-    }
+    },
+
+    async comenzarPartida (json) {
+        console.log('json: ', json)
+        return await axios.post('http://localhost:3000/api/partida/comenzar/', json)
+    },
 }
     

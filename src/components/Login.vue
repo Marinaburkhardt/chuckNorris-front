@@ -21,11 +21,6 @@ export default {
       botonDeshabilitado: false,
       nick: "",
       password: "",
-      jugadores: [
-        { nick: "mburkhardt", password: 123 },
-        { nick: "edditrana", password: 123 },
-        { nick: "mkraitman", password: 123 }
-      ]
     };
   },
 

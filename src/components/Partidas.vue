@@ -109,7 +109,7 @@ NickJugador2: (
           />
           <h3>Nueva partida vs {{versus}}!</h3>
         </div>
-        <b-button class="mt-3" variant="outline-danger" block @click="hideModal">COMENZAR</b-button>
+        <b-button class="mt-3" variant="outline-danger" block @click="comenzarPartida()">COMENZAR</b-button>
         <b-button class="mt-2" variant="outline-warning" block @click="toggleModal">CANCELAR</b-button>
       </b-modal>
     </div>
@@ -139,7 +139,8 @@ tbody {
 
 
 <script>
-import RestServices from '../services/RestServices';
+const RestServices = require('../services/RestServices.js');
+// import RestServices from "@/services/RestServices";
 
 export default {
   name: "partidas",
@@ -172,6 +173,7 @@ export default {
       }
     },
     setModalNuevaPartida(vs) {
+      console.log('vs: ', vs)
       this.versus = vs;
       this.modalName = "nueva-partida-modal";
     },
@@ -184,6 +186,13 @@ export default {
     toggleModal() {
       this.$refs[this.modalName].toggle("#toggle-btn");
     },
+    async comenzarPartida (nickJugador1, nickJugador2) {
+      let json = { nickJugador1: this.jugadorLogueado, nickJugador2: this.versus }
+      console.log('json: ', json)
+      let respuestaComenzar = await RestServices.default.comenzarPartida(json);
+      console.log('respuestaComenzar.data[0].IdPartida: ', respuestaComenzar.data[0].IdPartida);
+      this.hideModal();
+    }
   },
   computed: {
     estaLogueado() {
