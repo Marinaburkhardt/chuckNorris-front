@@ -112,18 +112,15 @@
 
 <script>
 
+import RestServices from "@/services/RestServices";
+
 export default {
     name: 'Juego',
+    props: ['id'],
     
     data: function() {
     return {
-      ganadoresTurno: [
-        { turno: 1, nick: "mkraitman" },
-        { turno: 2, nick: "edditrana" },
-        { turno: 3, nick: "edditrana" },
-        { turno: 4, nick: "mkraitman" },
-        { turno: 5, nick: "edditrana" }
-      ],
+      ganadoresTurno: '',
       figuraLanzada : false,
       figuraLanzadaSombrero : false,
       figuraLanzadaGesto: false,
@@ -156,6 +153,15 @@ export default {
   },
    created() {
     this.randomPickerFigura();
+    console.log(window.location.pathname.split('/'))
+    // console.log($router.params)
+
+    RestServices.obtenerDetallePartidas(idPartida)
+      .then(response => {
+      // console.log("console de saraza" + response.data)
+      // this.ganadoresTurno = response.data
+    })
+    .catch(error => console.log(error));
   },
   methods: {
 

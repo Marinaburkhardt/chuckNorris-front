@@ -25,6 +25,11 @@ export default {
     async obtenerJugadores(nickJugador) {
         console.log('nickJugador: ', nickJugador)
         return await axios.get('http://localhost:3000/api/jugador/jugadores/' + nickJugador)
+    },
+
+    async obtenerDetallePartidas (idPartida) {
+        // console.log('nickJugador: ', nickJugador)
+        return await axios.get('http://localhost:3000/api/partida/detalles/' + idPartida)
     }
 }
     

@@ -24,24 +24,8 @@ export const router = new VueRouter({
       { path: '/juegoFinalizadoGanador', component: JuegoFinalizadoGanador },
       { path: '/juegoFinalizadoPerdedor', component: JuegoFinalizadoPerdedor },
       { path: '/juego', component: Juego },
+      { path: '/juego/:id', component: Juego, props: true },
       { path: '/about', component: About },
       { path: '*', redirect: '/' }
     ]
   });
-  
-  
-// router.beforeEach((to, from, next) => {
-//     // redirect to login page if not logged in and trying to access a restricted page
-//     const publicPages = ['/login'];
-//     const authRequired = !publicPages.includes(to.path);
-//     const loggedIn = localStorage.getItem('user');
-  
-//     if (authRequired && !loggedIn) {
-//       return next({ 
-//         path: '/login', 
-//         query: { returnUrl: to.path } 
-//       });
-//     }
-  
-//     next();
-//   })
