@@ -223,7 +223,7 @@ export default {
 
         console.log('json Jugar: ', jsonJugar)
 
-        let respuestaJugar = await RestServices.jugar(this.$store.getters.getNick, jsonJugar)
+        let respuestaJugar = await RestServices.jugar(this.$store.getters.getNick, this.detallePartida)
         console.log('respuestaJugar: ', respuestaJugar);
         
 
