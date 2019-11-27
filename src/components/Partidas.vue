@@ -4,6 +4,7 @@
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <div class="col-5 mt-3 mr-3 container-fluid">
         <h3>Partidas</h3>
+        <button type="button" class="btn btn-primary" @click="recargarJugadoresPartidas">Recargar</button>
 
         <table class="table table-hover">
           <tbody>
