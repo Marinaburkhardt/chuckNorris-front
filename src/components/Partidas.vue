@@ -135,7 +135,7 @@ export default {
   
   async created() {
     await this.obtenerDatos();
-    // this.obtenerJugadores();
+    
   },
   data: function() {
     return {

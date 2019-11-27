@@ -120,6 +120,8 @@ export default {
     
     data: function() {
     return {
+      detallePartida: '',
+      idPartida: '',
       ganadoresTurno: '',
       figuraLanzada : false,
       figuraLanzadaSombrero : false,
@@ -153,11 +155,14 @@ export default {
   },
    created() {
     this.randomPickerFigura();
-    console.log(window.location.pathname.split('/'))
-    // console.log($router.params)
 
-    RestServices.obtenerDetallePartidas(idPartida)
+    this.idPartida = window.location.pathname.split(':')[1];
+    // console.log("el id es...."+ this.idPartida)    
+
+    RestServices.obtenerDetallePartidas(this.idPartida)
       .then(response => {
+        this.detallePartida = response.data[1]
+        console.log("detalle partida: "+ this.detallePartida)
       // console.log("console de saraza" + response.data)
       // this.ganadoresTurno = response.data
     })
