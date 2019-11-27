@@ -208,8 +208,7 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Si!"
       });
-      if ((responseConfirmacionJugada.value = true && responseConfirmacionJugada.dismiss != 'cancel')) {
-        console.log('responseConfirmacionJugada: ', responseConfirmacionJugada);
+      if (responseConfirmacionJugada.value = true && responseConfirmacionJugada.dismiss != "cancel") {
         console.log(this.figuraElegida);
         console.log("codigoJugada: ", codigoJugada);
         // console.log(this.pathAFiguraJugadaJugador2)
@@ -219,10 +218,12 @@ export default {
         let responseSwal = await this.$swal(
           "Exito",
           "Jugaste correctamente",
-          "success",
+          "success"
         );
-        console.log("responseSwal: ", responseSwal);
         if ((responseSwal.value = true)) {
+          await this.$store.dispatch("recargarPartidasJugadores", {
+            nick: this.$store.getters.getNick,
+          });
           this.$router.push("/partidas");
         }
       }
