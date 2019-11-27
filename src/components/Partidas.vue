@@ -2,13 +2,13 @@
   <div>
     <br />
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
-      <div class="col-4 mt-4 mr-4 container-fluid">
+      <div class="col-5 mt-3 mr-3 container-fluid">
         <h3>Partidas</h3>
 
         <table class="table table-hover">
           <tbody>
             <tr v-for="partida in partidas" :key="partida.IdPartida">
-              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}} - {{partida.FechaCreacion}}</td>
+              <td>ID: {{partida.IdPartida}} - {{partida.NickJugador}} vs {{partida.NickJugador2}} - {{partida.FechaCreacion || dd/mm}}</td>
               <td class="text-right pr-5">
                 <b-button
                   v-if="partida.JugadorPorJugar != jugadorLogueado"
@@ -31,7 +31,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-4 mt-4 ml-4 container-fluid">
+      <div class="col-5 mt-3 ml-3 container-fluid">
         <table class="table table-hover">
           <h3>Jugadores</h3>
           <tbody class>
@@ -132,10 +132,18 @@ const RestServices = require("../services/RestServices.js");
 export default {
   name: "partidas",
 
-  created() {
+  async created() {
     this.partidas = this.$store.getters.getPartidas;
     this.jugadorLogueado = this.$store.getters.getNick;
     this.jugadores = this.$store.getters.getJugadores;
+    if (this.$store.getters.getIsAuthenticated) {
+      await this.$store.dispatch("recargarPartidasJugadores", {
+            nick: this.$store.getters.getNick
+          });
+      this.partidas = this.$store.getters.getPartidas;
+      this.jugadorLogueado = this.$store.getters.getNick;
+      this.jugadores = this.$store.getters.getJugadores;
+    }
   },
   data: function() {
     return {

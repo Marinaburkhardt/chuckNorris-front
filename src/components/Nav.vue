@@ -23,9 +23,6 @@
     <b-navbar-brand class="ml-2" v-if="estaLogueado">
       <router-link to="/juegoFinalizadoPerdedor" style="color:white">Perdedor</router-link>
     </b-navbar-brand>
-    <!-- <b-navbar-brand class="ml-2">
-      <router-link to="/juego" style="color:white">Juego</router-link>
-    </b-navbar-brand> -->
   </b-navbar>
     
 </template>
