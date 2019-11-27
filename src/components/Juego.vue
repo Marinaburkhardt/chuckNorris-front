@@ -17,9 +17,9 @@
               <th style="text-align: center">{{jugador.turno}}</th>
               <td style="text-align: center">{{jugador.nick}}</td>
             </tr>
-          </tbody> -->
+          </tbody>-->
           <tbody>
-            <tr v-for="turno in turnos"  :key="turno.IdTurno">
+            <tr v-for="turno in turnos" :key="turno.IdTurno">
               <th style="text-align: center">{{turno.NumeroTurno}}</th>
               <td style="text-align: center">{{turno.NickJugadorGanador}}</td>
             </tr>
@@ -50,35 +50,51 @@
                 <img class="imgJugada" src="../assets/tuTurno.jpg" />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaArma">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)">
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)"
+                />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaGesto">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)">
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)"
+                />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.figuraLanzadaSombrero">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)">
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)"
+                />
               </template>
             </vue-flipcard>
           </div>
-
         </div>
 
         <br />
         <h5>Elije tu figura!</h5>
         <br />
-        
-        <div class="cards" id="figuraJugada">
-            <div v-on:click="setearAFiguraLanzada('sombrero')" class="card col-4">
-              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)">
-            </div>
-            <div v-on:click="setearAFiguraLanzada('gesto')" class="card col-4">
-              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`) ">
-            </div>
-            <div v-on:click="setearAFiguraLanzada('arma')" class="card col-4">
-              <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)">
-            </div>
-        </div>
 
+        <div class="cards" id="figuraJugada">
+          <div v-on:click="jugar('arma')" class="card col-4">
+            <img
+              class="imgJugada"
+              :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)"
+            />
+          </div>
+          <div v-on:click="jugar('gesto')" class="card col-4">
+            <img
+              class="imgJugada"
+              :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`) "
+            />
+          </div>
+          <div v-on:click="jugar('sombrero')" class="card col-4">
+            <img
+              class="imgJugada"
+              :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)"
+            />
+          </div>
+        </div>
       </div>
 
       <!-- Instrucciones -->
@@ -117,31 +133,30 @@
 </template>
 
 <script>
-
 import RestServices from "@/services/RestServices";
 
 export default {
-    name: 'Juego',
-    props: ['id'],
-    
-    data: function() {
+  name: "Juego",
+  props: ["id"],
+
+  data: function() {
     return {
-      turnos: '',
-      detallePartida: '',
-      idPartida: '',
-      ganadoresTurno: '',
-      figuraLanzada : false,
-      figuraLanzadaSombrero : false,
+      turnos: "",
+      detallePartida: "",
+      idPartida: "",
+      ganadoresTurno: "",
+      figuraLanzada: false,
+      figuraLanzadaSombrero: false,
       figuraLanzadaGesto: false,
       figuraLanzadaArma: false,
 
-      numeroRandom: '',
-      
+      numeroRandom: "",
+
       figurasSombrero: [
         "../assets/gestos-jugadas/sombrero/sombrero_01.png",
         "../assets/gestos-jugadas/sombrero/sombrero_02.png",
         "../assets/gestos-jugadas/sombrero/sombrero_03.png",
-        "../assets/gestos-jugadas/sombrero/sombrero_04.png",
+        "../assets/gestos-jugadas/sombrero/sombrero_04.png"
       ],
       figurasSonrisa: [
         "../assets/gestos-jugadas/gestos/gestos_01.png",
@@ -155,56 +170,81 @@ export default {
         "../assets/gestos-jugadas/armas/armas_03.png",
         "../assets/gestos-jugadas/armas/armas_04.png"
       ],
-      figuraElegida: '',
-      pathAFiguraJugadaJugador2: ''
+      figuraElegida: "",
+      pathAFiguraJugadaJugador2: ""
     };
-    
   },
   created() {
     this.randomPickerFigura();
-    RestServices.obtenerDetallePartidas(window.location.pathname.split(':')[1])
+    RestServices.obtenerDetallePartidas(window.location.pathname.split(":")[1])
       .then(response => {
-      this.detallePartida = response.data
-      this.turnos = response.data[1].Turnos;
-    })
-    .catch(error => console.log(error));
+        this.detallePartida = response.data;
+        this.turnos = response.data[1].Turnos;
+      })
+      .catch(error => console.log(error));
   },
   methods: {
-
-    setearAFiguraLanzada(eleccion) {
+    async jugar(eleccion) {
+      let codigoJugada;
       this.figuraLanzada = true;
       this.figuraElegida = eleccion;
       // console.log("pasó a true? -->" + this.figuraLanzada)
-      if (eleccion == "sombrero"){
+      if (eleccion == "sombrero") {
         this.figuraLanzadaSombrero = true;
-      } else if (eleccion == "arma"){
+        codigoJugada = 3;
+      } else if (eleccion == "arma") {
         this.figuraLanzadaArma = true;
+        codigoJugada = 1;
       } else {
         this.figuraLanzadaGesto = true;
+        codigoJugada = 2;
       }
-      // console.log(this.figuraElegida)
-      // console.log(this.pathAFiguraJugadaJugador2)
-
+      let responseConfirmacionJugada = await this.$swal({
+        title: "Atencion!",
+        text: "Estás seguro de jugar " + eleccion,
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si!"
+      });
+      if ((responseConfirmacionJugada.value = true && responseConfirmacionJugada.dismiss != 'cancel')) {
+        console.log('responseConfirmacionJugada: ', responseConfirmacionJugada);
+        console.log(this.figuraElegida);
+        console.log("codigoJugada: ", codigoJugada);
+        // console.log(this.pathAFiguraJugadaJugador2)
+        console.log("detallePartida: ", this.detallePartida);
+        // TODO: pegarle a la jugada
+        // TODO: pegarle al store para actualizar las partidas y los jugadores
+        let responseSwal = await this.$swal(
+          "Exito",
+          "Jugaste correctamente",
+          "success",
+        );
+        console.log("responseSwal: ", responseSwal);
+        if ((responseSwal.value = true)) {
+          this.$router.push("/partidas");
+        }
+      }
     },
 
-    randomPickerFigura (){
-      this.numeroRandom = (Math.floor(Math.random() * 4)+1)
-      this.numeroRandom = '0' + this.numeroRandom + '.png';
+    randomPickerFigura() {
+      this.numeroRandom = Math.floor(Math.random() * 4) + 1;
+      this.numeroRandom = "0" + this.numeroRandom + ".png";
     },
 
-    onManualFlip () {
-      this.$refs.flipcard.flip()
+    onManualFlip() {
+      this.$refs.flipcard.flip();
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .imgJugada {
   position: relative;
-  max-width:100%;
-  max-height:100%;
+  max-width: 100%;
+  max-height: 100%;
   display: inline-flex;
   justify-content: center;
 }
@@ -220,9 +260,8 @@ export default {
 .card {
   display: inline-flex;
   position: relative;
-  background-size:cover;
-  max-width:100%;
-  max-height:100%;
-  
+  background-size: cover;
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
