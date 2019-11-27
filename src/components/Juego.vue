@@ -249,7 +249,9 @@ export default {
           this.detallePartida
         );
         console.log("respuestaJugar: ", respuestaJugar);
-        NickJugador2 = this.detallePartida[0].NickJugador2;
+
+        console.log("this.detallePartida[0]: ", this.detallePartida[0]);
+        let NickJugador2 = this.detallePartida[0].NickJugador2;
         console.log("NickJugador2: ", NickJugador2);
         console.log(
           "this.$store.getters.getNick: ",
