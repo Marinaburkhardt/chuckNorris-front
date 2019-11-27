@@ -39,13 +39,22 @@
                 <img class="imgJugada" src="../assets/interrogation.png" />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 1">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)" />
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)"
+                />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 2">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)" />
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)"
+                />
               </template>
               <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 3">
-                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)" />
+                <img
+                  class="imgJugada"
+                  :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)"
+                />
               </template>
             </vue-flipcard>
           </div>
@@ -178,7 +187,7 @@ export default {
       ],
       figuraElegida: "",
       pathAFiguraJugadaJugador2: "",
-      jugadaJugador1: "",
+      jugadaJugador1: ""
     };
   },
   created() {
@@ -187,10 +196,13 @@ export default {
       .then(response => {
         this.detallePartida = response.data;
         this.turnos = response.data[1].Turnos;
-        this.jugadaJugador1 = this.turnos[this.turnos.length-1].IdFigura1
+        this.jugadaJugador1 = this.turnos[this.turnos.length - 1].IdFigura1;
         console.log("Figura jugador 1: " + this.jugadaJugador1);
         // console.log("Figura jugador 1: " + this.turnos[this.turnos.length-1].IdFigura1);
-        console.log("Print numero de turno: " + this.turnos[this.turnos.length-1].NumeroTurno);
+        console.log(
+          "Print numero de turno: " +
+            this.turnos[this.turnos.length - 1].NumeroTurno
+        );
       })
       .catch(error => console.log(error));
   },
@@ -224,20 +236,25 @@ export default {
           true && responseConfirmacionJugada.dismiss != "cancel")
       ) {
         this.detallePartida = this.detallePartida.concat({
-        IdPartida: this.detallePartida[0].IdPartida,
-        IdTurno: this.turnos[this.turnos.length-1].IdTurno, 
-        NumeroTurno: this.turnos[this.turnos.length-1].NumeroTurno,
-        NickJugadorJugada: this.$store.getters.getNick,
-        IdFigura: codigoJugada
-        })
-        let jsonJugar = JSON.stringify(this.detallePartida)
+          IdPartida: this.detallePartida[0].IdPartida,
+          IdTurno: this.turnos[this.turnos.length - 1].IdTurno,
+          NumeroTurno: this.turnos[this.turnos.length - 1].NumeroTurno,
+          NickJugadorJugada: this.$store.getters.getNick,
+          IdFigura: codigoJugada
+        });
+        let jsonJugar = JSON.stringify(this.detallePartida);
 
-        console.log('json Jugar: ', jsonJugar)
-
-        let respuestaJugar = await RestServices.jugar(this.$store.getters.getNick, this.detallePartida)
-        console.log('respuestaJugar: ', respuestaJugar);
-        
-
+        let respuestaJugar = await RestServices.jugar(
+          this.$store.getters.getNick,
+          this.detallePartida
+        );
+        console.log("respuestaJugar: ", respuestaJugar);
+        NickJugador2 = this.detallePartida[0].NickJugador2;
+        console.log("NickJugador2: ", NickJugador2);
+        console.log(
+          "this.$store.getters.getNick: ",
+          this.$store.getters.getNick
+        );
         let responseSwal = await this.$swal(
           "Exito",
           "Jugaste correctamente",
@@ -247,7 +264,13 @@ export default {
           await this.$store.dispatch("recargarPartidasJugadores", {
             nick: this.$store.getters.getNick
           });
-          this.$router.push("/partidas");
+          if (this.$store.getters.getNick == NickJugador2 && respuestaJugar.data.codigo == 202) {
+            this.$router.push("/juegoFinalizadoGanador");
+          } else if (respuestaJugar.data.codigo == 201) {
+            this.$router.push("/juegoFinalizadoPerdedor");
+          } else {
+            this.$router.push("/partidas");
+          }
         }
       }
     },
