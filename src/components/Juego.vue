@@ -12,10 +12,16 @@
               <th style="text-align: center">Ganador</th>
             </tr>
           </thead>
-          <tbody v-for="jugador in ganadoresTurno" :key="jugador">
+          <!-- <tbody v-for="jugador in ganadoresTurno" :key="jugador">
             <tr>
               <th style="text-align: center">{{jugador.turno}}</th>
               <td style="text-align: center">{{jugador.nick}}</td>
+            </tr>
+          </tbody> -->
+          <tbody v-for="turno in turnos">
+            <tr>
+              <th style="text-align: center">{{turno.NumeroTurno}}</th>
+              <td style="text-align: center">{{turno.NickJugadorGanador}}</td>
             </tr>
           </tbody>
         </table>
@@ -120,6 +126,7 @@ export default {
     
     data: function() {
     return {
+      turnos: '',
       detallePartida: '',
       idPartida: '',
       ganadoresTurno: '',
@@ -153,18 +160,33 @@ export default {
     };
     
   },
-   created() {
+  //  async created() {
+  //   this.randomPickerFigura();
+
+  //   this.idPartida = window.location.pathname.split(':')[1];
+  //   // console.log("el id es...."+ this.idPartida)    
+
+  //   let detalle = await RestServices.obtenerDetallePartidas(this.idPartida);
+  //   console.log('detalle: ', detalle);
+  //   this.detallePartida = detalle;
+  //   console.log('this.detallePartida: ', this.detallePartida);
+  //   // RestServices.obtenerDetallePartidas(this.idPartida)
+  //   //   .then(response => {
+  //   //     this.detallePartida = response.data[1]
+  //   //     console.log("detalle partida: "+ this.detallePartida)
+  //   //   // console.log("console de saraza" + response.data)
+  //   //   // this.ganadoresTurno = response.data
+  //   // })
+  //   // .catch(error => console.log(error));
+  // },
+  created() {
     this.randomPickerFigura();
-
-    this.idPartida = window.location.pathname.split(':')[1];
-    // console.log("el id es...."+ this.idPartida)    
-
-    RestServices.obtenerDetallePartidas(this.idPartida)
+    RestServices.obtenerDetallePartidas(window.location.pathname.split(':')[1])
       .then(response => {
-        this.detallePartida = response.data[1]
-        console.log("detalle partida: "+ this.detallePartida)
-      // console.log("console de saraza" + response.data)
-      // this.ganadoresTurno = response.data
+      console.log('response: ', response.data[1]);
+      this.turnos = response.data[1];
+      // this.mejoresJugadores = response.data
+      // console.log("los jugadores traidos son: " + this.mejoresJugadores)
     })
     .catch(error => console.log(error));
   },
