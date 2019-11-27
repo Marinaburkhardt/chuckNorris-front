@@ -8,7 +8,7 @@
         <table class="table table-hover">
           <tbody>
             <tr v-for="partida in partidas" :key="partida.IdPartida">
-              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}}</td>
+              <td>{{partida.NickJugador}} vs {{partida.NickJugador2}} - {{partida.FechaCreacion}}</td>
               <td class="text-right pr-5">
                 <b-button
                   v-if="partida.JugadorPorJugar != jugadorLogueado"

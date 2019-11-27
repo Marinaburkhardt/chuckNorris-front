@@ -22,6 +22,8 @@ export default new Vuex.Store({
             state.partidas = login.partidas
         },
         setPartidasJugadores(state, datos) {
+            state.jugadores = '',
+            state.partidas = '',
             state.jugadores = datos.jugadores,
             state.partidas = datos.partidas
         }

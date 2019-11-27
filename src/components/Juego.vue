@@ -208,13 +208,25 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Si!"
       });
-      if (responseConfirmacionJugada.value = true && responseConfirmacionJugada.dismiss != "cancel") {
-        console.log(this.figuraElegida);
-        console.log("codigoJugada: ", codigoJugada);
-        // console.log(this.pathAFiguraJugadaJugador2)
-        console.log("detallePartida: ", this.detallePartida);
-        // TODO: pegarle a la jugada
-        // TODO: pegarle al store para actualizar las partidas y los jugadores
+      if (
+        (responseConfirmacionJugada.value =
+          true && responseConfirmacionJugada.dismiss != "cancel")
+      ) {
+        this.detallePartida = this.detallePartida.concat({
+        IdPartida: this.detallePartida[0].IdPartida,
+        IdTurno: this.turnos[this.turnos.length-1].IdTurno, 
+        NumeroTurno: this.turnos[this.turnos.length-1].NumeroTurno,
+        NickJugadorJugada: this.$store.getters.getNick,
+        IdFigura: codigoJugada
+        })
+        let jsonJugar = JSON.stringify(this.detallePartida)
+
+        console.log('json Jugar: ', jsonJugar)
+
+        let respuestaJugar = await RestServices.jugar(this.$store.getters.getNick, jsonJugar)
+        console.log('respuestaJugar: ', respuestaJugar);
+        
+
         let responseSwal = await this.$swal(
           "Exito",
           "Jugaste correctamente",
@@ -222,7 +234,7 @@ export default {
         );
         if ((responseSwal.value = true)) {
           await this.$store.dispatch("recargarPartidasJugadores", {
-            nick: this.$store.getters.getNick,
+            nick: this.$store.getters.getNick
           });
           this.$router.push("/partidas");
         }

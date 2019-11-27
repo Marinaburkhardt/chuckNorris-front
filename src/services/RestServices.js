@@ -14,7 +14,7 @@ export default {
     },
     
     async jugar(jugadorQueJuega, json) {
-        return await axios.get('http://localhost:3000/api/partida/jugar/' + jugadorQueJuega, json)
+        return await axios.post('http://localhost:3000/api/partida/jugar/' + jugadorQueJuega, json)
     },
     
     async login(json) {
