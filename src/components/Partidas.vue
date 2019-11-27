@@ -39,7 +39,7 @@
               <td>{{jugador.NickJugador}}</td>
               <td class="text-right pr-5">
                 <button
-                  v-on:click="setModalNuevaPartida(jugador.NickJugador)"
+                  v-on:click="setModalNuevaPartida(jugador.NickJugador, jugador.Mail)"
                   @click="toggleModal"
                   style="width: 70px"
                   type="button"
@@ -132,18 +132,10 @@ const RestServices = require("../services/RestServices.js");
 export default {
   name: "partidas",
 
-  async created() {
+  created() {
     this.partidas = this.$store.getters.getPartidas;
     this.jugadorLogueado = this.$store.getters.getNick;
     this.jugadores = this.$store.getters.getJugadores;
-    if (this.$store.getters.getIsAuthenticated) {
-      await this.$store.dispatch("recargarPartidasJugadores", {
-            nick: this.$store.getters.getNick
-          });
-      this.partidas = this.$store.getters.getPartidas;
-      this.jugadorLogueado = this.$store.getters.getNick;
-      this.jugadores = this.$store.getters.getJugadores;
-    }
   },
   data: function() {
     return {
@@ -151,9 +143,9 @@ export default {
       jugadorLogueado: "",
       partidas: "",
       versus: "",
-      // showModal: false,
       modalName: "",
-      idPartidaSeleccionada: ""
+      idPartidaSeleccionada: "",
+      mailJugadorSeleccionado: ""
     };
   },
   methods: {
@@ -170,8 +162,9 @@ export default {
         this.modalName = "no-turno-modal";
       }
     },
-    setModalNuevaPartida(vs) {
+    setModalNuevaPartida(vs, jugadorMail) {
       this.versus = vs;
+      this.mailJugadorSeleccionado = jugadorMail;
       this.modalName = "nueva-partida-modal";
     },
     showModal() {
@@ -189,17 +182,28 @@ export default {
     async comenzarPartida(nickJugador1, nickJugador2) {
       let json = {
         nickJugador1: this.jugadorLogueado,
-        nickJugador2: this.versus
+        MailJugador1: this.$store.getters.getMail,
+        nickJugador2: this.versus,
+        MailJugador2: this.mailJugadorSeleccionado
       };
       let respuestaComenzar = await RestServices.default.comenzarPartida(json);
       this.idPartidaSeleccionada = respuestaComenzar.data[0].IdPartida;
       this.continuarPartida();
+    },
+    recargarJugadoresPartidas() {
+      this.$store.dispatch("recargarPartidasJugadores", {
+        nick: this.$store.getters.getNick
+      });
+      this.partidas = this.$store.getters.getPartidas;
+      this.jugadorLogueado = this.$store.getters.getNick;
+      this.jugadores = this.$store.getters.getJugadores;
     }
   },
+
   computed: {
     estaLogueado() {
       return this.$store.getters.estaLogueado;
-    },
+    }
   }
 };
 </script>
