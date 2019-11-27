@@ -1,16 +1,16 @@
 <template>
   <div>
-    <br>
+    <br />
     <div class="row" style="width: 100%;overflow-x: scroll(or auto);">
       <div class="col-4 mt-4 mr-4 container-fluid">
         <h3>Partidas</h3>
 
         <table class="table table-hover">
           <tbody>
-            <tr v-for="partida in partidas" :key="partida">
+            <tr v-for="partida in partidas" :key="partida.IdPartida">
               <td>{{partida.NickJugador}} vs {{partida.NickJugador2}}</td>
               <td class="text-right pr-5">
-                <b-button 
+                <b-button
                   v-if="partida.JugadorPorJugar != jugadorLogueado"
                   v-on:click="setModalTurno(partida.NickJugador, partida.NickJugador2, partida.JugadorPorJugar == jugadorLogueado, partida.IdPartida)"
                   @click="toggleModal"
@@ -35,7 +35,7 @@
         <table class="table table-hover">
           <h3>Jugadores</h3>
           <tbody class>
-            <tr v-for="jugador in jugadores" :key="jugador">
+            <tr v-for="jugador in jugadores" :key="jugador.NickJugador">
               <td>{{jugador.NickJugador}}</td>
               <td class="text-right pr-5">
                 <button
@@ -127,30 +127,30 @@ tbody {
 
 
 <script>
-const RestServices = require('../services/RestServices.js');
-// import RestServices from "@/services/RestServices";
+const RestServices = require("../services/RestServices.js");
 
 export default {
   name: "partidas",
-  
-  async created() {
-    await this.obtenerDatos();
-    
+
+  created() {
+    this.partidas = this.$store.getters.getPartidas;
+    this.jugadorLogueado = this.$store.getters.getNick;
+    this.jugadores = this.$store.getters.getJugadores;
   },
   data: function() {
     return {
-      jugadores: '',
-      jugadorLogueado: '',
-      partidas: '',
+      jugadores: "",
+      jugadorLogueado: "",
+      partidas: "",
       versus: "",
-      showModal: false,
+      // showModal: false,
       modalName: "",
-      idPartidaSeleccionada: "",
+      idPartidaSeleccionada: ""
     };
   },
   methods: {
     setModalTurno(jugador1, jugador2, esIgualAlLogueado, idPartida) {
-      this.idPartidaSeleccionada = idPartida
+      this.idPartidaSeleccionada = idPartida;
       if (jugador1 == this.jugadorLogueado) {
         this.versus = jugador2;
       } else {
@@ -175,12 +175,14 @@ export default {
     toggleModal() {
       this.$refs[this.modalName].toggle("#toggle-btn");
     },
-    continuarPartida(){
-      this.$router.push("juego/:"+this.idPartidaSeleccionada);
-      hideModal();
+    continuarPartida() {
+      this.$router.push("juego/:" + this.idPartidaSeleccionada);
     },
-    async comenzarPartida (nickJugador1, nickJugador2) {
-      let json = { nickJugador1: this.jugadorLogueado, nickJugador2: this.versus }
+    async comenzarPartida(nickJugador1, nickJugador2) {
+      let json = {
+        nickJugador1: this.jugadorLogueado,
+        nickJugador2: this.versus
+      };
       let respuestaComenzar = await RestServices.default.comenzarPartida(json);
       this.idPartidaSeleccionada = respuestaComenzar.data[0].IdPartida;
       this.continuarPartida();
@@ -188,12 +190,7 @@ export default {
   },
   computed: {
     estaLogueado() {
-      return this.$store.getters.estaLogueado
-    },
-    obtenerDatos() {
-      this.partidas = this.$store.getters.getPartidas
-      this.jugadorLogueado = this.$store.getters.getNick
-      this.jugadores = this.$store.getters.getJugadores
+      return this.$store.getters.estaLogueado;
     },
   }
 };

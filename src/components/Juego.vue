@@ -18,8 +18,8 @@
               <td style="text-align: center">{{jugador.nick}}</td>
             </tr>
           </tbody> -->
-          <tbody v-for="turno in turnos">
-            <tr>
+          <tbody>
+            <tr v-for="turno in turnos"  :key="turno.IdTurno">
               <th style="text-align: center">{{turno.NumeroTurno}}</th>
               <td style="text-align: center">{{turno.NickJugadorGanador}}</td>
             </tr>
@@ -160,33 +160,12 @@ export default {
     };
     
   },
-  //  async created() {
-  //   this.randomPickerFigura();
-
-  //   this.idPartida = window.location.pathname.split(':')[1];
-  //   // console.log("el id es...."+ this.idPartida)    
-
-  //   let detalle = await RestServices.obtenerDetallePartidas(this.idPartida);
-  //   console.log('detalle: ', detalle);
-  //   this.detallePartida = detalle;
-  //   console.log('this.detallePartida: ', this.detallePartida);
-  //   // RestServices.obtenerDetallePartidas(this.idPartida)
-  //   //   .then(response => {
-  //   //     this.detallePartida = response.data[1]
-  //   //     console.log("detalle partida: "+ this.detallePartida)
-  //   //   // console.log("console de saraza" + response.data)
-  //   //   // this.ganadoresTurno = response.data
-  //   // })
-  //   // .catch(error => console.log(error));
-  // },
   created() {
     this.randomPickerFigura();
     RestServices.obtenerDetallePartidas(window.location.pathname.split(':')[1])
       .then(response => {
-      console.log('response: ', response.data[1]);
-      this.turnos = response.data[1];
-      // this.mejoresJugadores = response.data
-      // console.log("los jugadores traidos son: " + this.mejoresJugadores)
+      this.detallePartida = response.data
+      this.turnos = response.data[1].Turnos;
     })
     .catch(error => console.log(error));
   },
