@@ -18,12 +18,12 @@ export default {
     },
 
     async obtenerPartidas (nickJugador) {
-        console.log('nickJugador: ', nickJugador)
+        // console.log('nickJugador: ', nickJugador)
         return await axios.get('http://localhost:3000/api/partida/partidas/' + nickJugador)
     },
 
     async obtenerJugadores(nickJugador) {
-        console.log('nickJugador: ', nickJugador)
+        // console.log('nickJugador: ', nickJugador)
         return await axios.get('http://localhost:3000/api/jugador/jugadores/' + nickJugador)
     },
 
@@ -33,7 +33,7 @@ export default {
     },
 
     async comenzarPartida (json) {
-        console.log('json: ', json)
+        // console.log('json: ', json)
         return await axios.post('http://localhost:3000/api/partida/comenzar/', json)
     },
 }

@@ -26,12 +26,12 @@ export default new Vuex.Store({
         async login(state, jsonLogin) {
             try {
                 let responseLogin = await restServices.default.login(jsonLogin)
-                console.log('responseLogin: ', responseLogin.data)
+                // console.log('responseLogin: ', responseLogin.data)
                     if (responseLogin.status == 200) {
                         let responseObtenerPartidas = await restServices.default.obtenerPartidas(responseLogin.data.NickJugador);
                         let responseObtenerJugadores = await restServices.default.obtenerJugadores(responseLogin.data.NickJugador);
-                        console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
-                        console.log('responseObtenerJugadores: ', responseObtenerJugadores.data)
+                        // console.log('responseObtenerPartidas: ', responseObtenerPartidas.data)
+                        // console.log('responseObtenerJugadores: ', responseObtenerJugadores.data)
                         state.commit("setIsAuthenticated", {
                             nick: responseLogin.data.NickJugador,
                             mail: responseLogin.data.Mail,
@@ -41,7 +41,7 @@ export default new Vuex.Store({
                         })
                     }
             } catch (error) {
-                console.log(error)
+                // console.log(error)
             }
         },
         // async cargarPartidas () {

@@ -26,9 +26,9 @@ export default {
 
   methods: {
     async onSubmit() {
-      console.log('this.botonDeshabilitado antes - ', this.botonDeshabilitado)
+      // console.log('this.botonDeshabilitado antes - ', this.botonDeshabilitado)
       this.botonDeshabilitado = true;
-      console.log('this.botonDeshabilitado despues - ', this.botonDeshabilitado)
+      // console.log('this.botonDeshabilitado despues - ', this.botonDeshabilitado)
       await this.$store.dispatch('login',{
         nick: this.nick,
         password: this.password
