@@ -38,8 +38,14 @@
               <template slot="front">
                 <img class="imgJugada" src="../assets/interrogation.png" />
               </template>
-              <template slot="back">
-                <img class="imgJugada" src="../assets/background/finalizadoJoke.png" />
+              <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 1">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/armas/armas_${numeroRandom}`)" />
+              </template>
+              <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 2">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/gestos/gestos_${numeroRandom}`)" />
+              </template>
+              <template slot="back" v-if="this.figuraLanzada && this.jugadaJugador1 == 3">
+                <img class="imgJugada" :src="require(`@/assets/gestos-jugadas/sombrero/sombrero_${numeroRandom}`)" />
               </template>
             </vue-flipcard>
           </div>
@@ -171,7 +177,8 @@ export default {
         "../assets/gestos-jugadas/armas/armas_04.png"
       ],
       figuraElegida: "",
-      pathAFiguraJugadaJugador2: ""
+      pathAFiguraJugadaJugador2: "",
+      jugadaJugador1: "",
     };
   },
   created() {
@@ -180,6 +187,10 @@ export default {
       .then(response => {
         this.detallePartida = response.data;
         this.turnos = response.data[1].Turnos;
+        this.jugadaJugador1 = this.turnos[this.turnos.length-1].IdFigura1
+        console.log("Figura jugador 1: " + this.jugadaJugador1);
+        // console.log("Figura jugador 1: " + this.turnos[this.turnos.length-1].IdFigura1);
+        console.log("Print numero de turno: " + this.turnos[this.turnos.length-1].NumeroTurno);
       })
       .catch(error => console.log(error));
   },
