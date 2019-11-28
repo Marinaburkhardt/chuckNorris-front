@@ -191,7 +191,6 @@ export default {
     };
   },
   created() {
-    console.log('this.$router: ', this.$router);
     this.randomPickerFigura();
     RestServices.obtenerDetallePartidas(window.location.pathname.split(":")[1])
       .then(response => {
