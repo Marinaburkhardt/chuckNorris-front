@@ -191,18 +191,13 @@ export default {
     };
   },
   created() {
+    console.log('this.$router: ', this.$router);
     this.randomPickerFigura();
     RestServices.obtenerDetallePartidas(window.location.pathname.split(":")[1])
       .then(response => {
         this.detallePartida = response.data;
         this.turnos = response.data[1].Turnos;
         this.jugadaJugador1 = this.turnos[this.turnos.length - 1].IdFigura1;
-        console.log("Figura jugador 1: " + this.jugadaJugador1);
-        // console.log("Figura jugador 1: " + this.turnos[this.turnos.length-1].IdFigura1);
-        console.log(
-          "Print numero de turno: " +
-            this.turnos[this.turnos.length - 1].NumeroTurno
-        );
       })
       .catch(error => console.log(error));
   },
@@ -248,29 +243,22 @@ export default {
           this.$store.getters.getNick,
           this.detallePartida
         );
-        console.log("respuestaJugar: ", respuestaJugar);
-
-        console.log("this.detallePartida[0]: ", this.detallePartida[0]);
         let NickJugador2 = this.detallePartida[0].NickJugador2;
-        console.log("NickJugador2: ", NickJugador2);
-        console.log(
-          "this.$store.getters.getNick: ",
-          this.$store.getters.getNick
-        );
         let responseSwal = await this.$swal(
           "Exito",
           "Jugaste correctamente",
           "success"
         );
         if ((responseSwal.value = true)) {
-          await this.$store.dispatch("recargarPartidasJugadores", {
-            nick: this.$store.getters.getNick
-          });
-          if (this.$store.getters.getNick == NickJugador2 && respuestaJugar.data.codigo == 202) {
+          // console.log('respuestaJugar.data.codigo: ', respuestaJugar.data.codigo);
+          if (this.$store.getters.getNick == NickJugador2 && respuestaJugar.data.mensaje == 'Jugada hecha y partida terminada correctamente. Ganó el segundo') {
             this.$router.push("/juegoFinalizadoGanador");
-          } else if (respuestaJugar.data.codigo == 201) {
+          } else if (respuestaJugar.data.codigo == 'Jugada hecha y partida terminada correctamente. Ganó el primero') {
             this.$router.push("/juegoFinalizadoPerdedor");
           } else {
+          //   await this.$store.dispatch("recargarPartidasJugadores", {
+          //   nick: this.$store.getters.getNick
+          // });
             this.$router.push("/partidas");
           }
         }
